@@ -1,6 +1,6 @@
 # Liberty Bank Proyect
 
-proyecto de gestion de cuentas bancarias, para la clase de ingenieria de software de la universidad de los andes
+Proyecto de gestión de cuentas bancarias, para la clase de ingeniería de software de la universidad de los Andes
 
 ## Available Scripts
 
