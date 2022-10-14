@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Liberty Bank Proyect
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+proyecto de gestion de cuentas bancarias, para la clase de ingenieria de software de la universidad de los andes
 
 ## Available Scripts
 
