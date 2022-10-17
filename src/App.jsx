@@ -1,17 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import {BrowserRouter, Route, Routes, Navigate} from 'react-router-dom';
+import {useState} from 'react';
+import './styles/App.css';
+import Header from './components/Header';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+
+import Login from './components/Login';
+import PvRoute from './components/PvRoute';
 
 function App() {
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-      </header>
-      <main>
+  const [user, setUser] = useState(true);
 
-      </main>
-    </div>
+  const login = () =>
+  {
+    if(user)
+      setUser(false)
+    else
+      setUser(true);
+  }
+
+
+
+  return (
+    <BrowserRouter>
+      <div className="App">
+        { user !== false &&
+           <Header/>
+        }
+        {/* <button onClick={login}>Login</button> */}
+        <div className="main-container">
+            { user !== false &&
+              <Navbar/>
+            }
+            <main>
+              <Routes>
+                  <Route index element={
+                    user? <Home/> : <Login/>
+                  } />
+                  <Route path='/login' element={user? <Navigate to='/home'/>: <Login/>} />
+                  <Route path='/home' element={
+                    <PvRoute user={user}>
+                      <Home/>
+                    </PvRoute>
+                  } />
+              </Routes>
+            </main>
+        </div>
+        
+      </div>
+    </BrowserRouter>
   );
 }
 
