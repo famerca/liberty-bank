@@ -39,7 +39,7 @@ function App() {
                     user? <Home/> : <Login/>
                   } />
                   <Route path='/login' element={user? <Navigate to='/home'/>: <Login/>} />
-                  <Route path='/register' element={<Register/>}/>
+                  <Route path='/register' element={user? <Navigate to='/home'/>:<Register/>}/>
                   <Route path='/home' element={
                     <PvRoute user={user}>
                       <Home/>
