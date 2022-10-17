@@ -1,12 +1,12 @@
 import {BrowserRouter, Route, Routes, Navigate} from 'react-router-dom';
 import {useState} from 'react';
-import './styles/App.css';
+import './styles/App.scss';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
-
 import Login from './components/Login';
 import PvRoute from './components/PvRoute';
+import Register from './components/Register'
 
 function App() {
 
@@ -39,6 +39,7 @@ function App() {
                     user? <Home/> : <Login/>
                   } />
                   <Route path='/login' element={user? <Navigate to='/home'/>: <Login/>} />
+                  <Route path='/register' element={<Register/>}/>
                   <Route path='/home' element={
                     <PvRoute user={user}>
                       <Home/>
