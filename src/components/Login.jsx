@@ -5,6 +5,7 @@ import emaili from "../icons/Mail.svg";
 import locki from "../icons/Lock.svg";
 import logo from "../icons/LB.png";
 import img from "../icons/img.png";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
@@ -58,14 +59,15 @@ const Login = () => {
               <h1 className="subtitle">
                 Si no estás registrado, regístrate aquí
               </h1>
-              <button
-                type="submit"
-                value="Registrar"
-                placeholder="huehue"
-                className="primary-button login-button"
-              >
-                Registro
-              </button>
+              <Link to='/register'>
+                <button
+                  type="button"
+                  value="Registrar"
+                  className="primary-button login-button"
+                >
+                  Registro
+                </button>
+              </Link>
             </div>
           </div>
         </section>
