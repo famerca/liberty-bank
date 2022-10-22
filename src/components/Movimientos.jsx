@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
 import { VscError } from 'react-icons/vsc'
 import { AiFillPlusCircle } from 'react-icons/ai'
 
@@ -99,8 +99,9 @@ const Table = (props) => {
 
 }
 
-const RowData = (props) => {
+const RowData = forwardRef((props, ref) => {
   const { index } = props
+  const [visible, setVisible] = useState(false)
   const { type } = props
   const [nombre, setNombre] = useState(props.type == "movimientos" ? props.row.nombre : props.row.nombreCuenta)
   const [tipo, setTipo] = useState(props.row.tipo)
@@ -109,18 +110,30 @@ const RowData = (props) => {
   const [titular, setTitular] = useState(props.row.titular)
   const [banco, setBanco] = useState(props.row.banco)
 
+  const hiddenWhenVisible = { display: visible ? "none" : "" }
+  const showWhenVisible = { display: visible ? "" : "none" }
 
-  console.log(index)
+  // console.log(index)
   //aqui realizo una solicitud post cuando se modifiquen los datos 
+  function handleDelete(e) {
+    e.preventDefault()
+    setVisible(true)
+    console.log("you clicked")
+    return index
+  }
+
+  useImperativeHandle(ref, () => {
+    return handleDelete
+  })
 
   return (
-    <tr>
+    <tr style={hiddenWhenVisible}>
       {type == "movimientos" ?
         <>
           <td><input onChange={(e) => setNombre(e.target.value)} defaultValue={nombre} /></td>
           <td><input onChange={(e) => setTipo(e.target.value)} defaultValue={tipo} /></td>
           <td>{id}</td>
-          <td><button><VscError size={20} /> </button></td>
+          <td><button onClick={handleDelete} ><VscError size={20} /> </button></td>
         </>
         :
         <>
@@ -129,26 +142,29 @@ const RowData = (props) => {
           <td><input onChange={(e) => setTitular(e.target.value)} defaultValue={titular} /></td>
           <td><input onChange={(e) => setBanco(e.target.value)} defaultValue={banco} /></td>
           <td>{id}</td>
-          <td><button> <VscError size={20} /></button></td>
+          <td><button onClick={handleDelete} > <VscError size={20} /></button></td>
         </>
       }
     </tr>
   )
-}
+})
 
 const Rows = (props) => {
 
+  const ref = useRef()
   const [datos, setDatos] = useState([])
   const { tipo } = props
   useEffect(() => {
     setDatos([...props.data])
   }, [props.data])
 
+  console.log(ref)
+
   return (
     <>
       {datos.map((row, index) => {
         return (
-          <RowData index={index} key={index} type={tipo} row={row} />
+          <RowData ref={ref} index={index} key={index} type={tipo} row={row} />
         )
       })}
     </>
