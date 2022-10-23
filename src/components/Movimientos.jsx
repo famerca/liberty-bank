@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, forwardRef, useImperativeHandle } from 'react'
+import React, { useState, useEffect } from "react"// , useRef, forwardRef, useImperativeHandle } from 'react'
 import { VscError } from 'react-icons/vsc'
 import { AiFillPlusCircle } from 'react-icons/ai'
 
@@ -65,9 +65,9 @@ const Table = (props) => {
     //   // se inicializan los datos en caso de existir
     setDatos([...props.datos])
     setTipo(props.type)
-  }, [])
+  }, [props.datos, props.type])
 
-  const head = tipo == "movimientos" ?
+  const head = tipo === "movimientos" ?
     <tr >
       <th>Nombre</th>
       <th>Tipo</th>
@@ -97,7 +97,7 @@ const Table = (props) => {
         </thead>
         <tbody>
           {/* <Row data={datos} /> */}
-          {datos.length == 0 ? <label> loading ....</label> :
+          {datos.length === 0 ? <label> loading ....</label> :
             <Rows setShowNewRow={setNewRow} showNewRow={newRow} data={datos} tipo={tipo} />
           }
         </tbody>
@@ -175,7 +175,7 @@ const RowData = (props) => {// forwardRef((props, ref) => {
   // const showWhenVisible = { display: visible ? "" : "none" }
 
   useEffect(() => {
-    setNombre(props.type == "movimientos" ? props.row.nombre : props.row.nombreCuenta)
+    setNombre(props.type === "movimientos" ? props.row.nombre : props.row.nombreCuenta)
     setTipo(props.row.tipo)
     setId(props.row.id)
     setNumero(props.row.numero)
@@ -189,12 +189,11 @@ const RowData = (props) => {// forwardRef((props, ref) => {
     e.preventDefault()
     props.setDeleteRow({ index: index })
     setVisible(true)
-    console.log("you clicked")
   }
 
   return (
     <tr style={hiddenWhenVisible}>
-      {type == "movimientos" ?
+      {type === "movimientos" ?
         <>
           <td><input onChange={(e) => setNombre(e.target.value)} type="text" value={nombre} /></td>
           <td><input onChange={(e) => setTipo(e.target.value)} type="text" defaultValue={tipo} /></td>
