@@ -45,8 +45,17 @@ let datosCuentas = [
   { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
   { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
 ]
+const Movimientos = () => {
+  return (
+    <div style={{ display: "flex" }}>
+      <Table type="movimientos" datos={datosCategorias} />
+      <Table type="cuentas" datos={datosCuentas} />
+    </div >
+  )
+}
 
 const Table = (props) => {
+  const [newRow, setNewRow] = useState(false)
   const [datos, setDatos] = useState([])
   const [tipo, setTipo] = useState("")
 
@@ -80,7 +89,7 @@ const Table = (props) => {
     <div>
       <div style={{ display: "flex" }}>
         <h1 style={{ fontWeight: 1000, fontSize: "20px" }} >Categorias</h1>
-        <button style={{ border: "none" }}><AiFillPlusCircle size={20} /></button>
+        <button onClick={() => setNewRow(true)} style={{ border: "none" }}><AiFillPlusCircle size={20} /></button>
       </div>
       <table>
         <thead>
@@ -89,7 +98,7 @@ const Table = (props) => {
         <tbody>
           {/* <Row data={datos} /> */}
           {datos.length == 0 ? <label> loading ....</label> :
-            <Rows data={datos} tipo={tipo} />
+            <Rows setShowNewRow={setNewRow} showNewRow={newRow} data={datos} tipo={tipo} />
           }
         </tbody>
       </table>
@@ -98,6 +107,54 @@ const Table = (props) => {
   )
 
 }
+
+const Rows = (props) => {
+
+  const ref = useRef()
+  const [datos, setDatos] = useState([])
+  const { tipo } = props
+  useEffect(() => {
+    setDatos([...props.data])
+  }, [props.data])
+
+  // if (props.showNewRow) {
+  //   setDatos([{}, ...datos])
+  // }
+
+  // useEffect(() => {
+  //   setDatos([{}, ...datos])
+  // })
+
+
+  useEffect(() => {
+    console.log(tipo)
+    if (props.showNewRow) {
+      (tipo === "movimientos") ?
+        setDatos([{ nombre: "d", tipo: "s", id: 0 }, ...datos]) :
+        setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: 0 }, ...datos])
+
+      props.setShowNewRow(false)
+    }
+
+  }, [props.showNewRow])
+
+  console.log(datos)
+  // console.log(ref)
+
+  return (
+    <>
+      {datos.map((row, index) => {
+        return (
+          <RowData ref={ref} index={index} key={index} type={tipo} row={row} />
+        )
+      })}
+    </>
+
+  )
+
+}
+
+
 
 const RowData = forwardRef((props, ref) => {
   const { index } = props
@@ -113,6 +170,7 @@ const RowData = forwardRef((props, ref) => {
   const hiddenWhenVisible = { display: visible ? "none" : "" }
   const showWhenVisible = { display: visible ? "" : "none" }
 
+
   // console.log(index)
   //aqui realizo una solicitud post cuando se modifiquen los datos 
   function handleDelete(e) {
@@ -124,7 +182,7 @@ const RowData = forwardRef((props, ref) => {
 
   useImperativeHandle(ref, () => {
     return handleDelete
-  })
+  }, [])
 
   return (
     <tr style={hiddenWhenVisible}>
@@ -149,39 +207,8 @@ const RowData = forwardRef((props, ref) => {
   )
 })
 
-const Rows = (props) => {
-
-  const ref = useRef()
-  const [datos, setDatos] = useState([])
-  const { tipo } = props
-  useEffect(() => {
-    setDatos([...props.data])
-  }, [props.data])
-
-  console.log(ref)
-
-  return (
-    <>
-      {datos.map((row, index) => {
-        return (
-          <RowData ref={ref} index={index} key={index} type={tipo} row={row} />
-        )
-      })}
-    </>
-
-  )
-
-}
 
 
-const Movimientos = () => {
-  return (
-    <div style={{ display: "flex" }}>
-      <Table type="movimientos" datos={datosCategorias} />
-      <Table type="cuentas" datos={datosCuentas} />
-    </div >
-  )
-}
 
 export default Movimientos
 
