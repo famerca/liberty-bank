@@ -3,20 +3,20 @@ import { VscError } from 'react-icons/vsc'
 import { AiFillPlusCircle } from 'react-icons/ai'
 
 let datosCategorias = [
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
-  { nombre: "pago de algo", tipo: "ingreso", id: 1 },
+  { nombre: "nombre1", tipo: "ingreso", id: 1 },
+  { nombre: "nombre2", tipo: "ingreso", id: 1 },
+  { nombre: "nombre3", tipo: "ingreso", id: 1 },
+  { nombre: "nombre4", tipo: "ingreso", id: 1 },
+  { nombre: "nombre5", tipo: "ingreso", id: 1 },
+  { nombre: "nombre6", tipo: "ingreso", id: 1 },
+  { nombre: "nombre7", tipo: "ingreso", id: 1 },
+  { nombre: "nombre8", tipo: "ingreso", id: 1 },
+  { nombre: "nombre9", tipo: "ingreso", id: 1 },
+  { nombre: "nombre10", tipo: "ingreso", id: 1 },
+  { nombre: "nombre11", tipo: "ingreso", id: 1 },
+  { nombre: "nombre12", tipo: "ingreso", id: 1 },
+  { nombre: "nombre13", tipo: "ingreso", id: 1 },
+  { nombre: "nombre14", tipo: "ingreso", id: 1 },
 
 ]
 
@@ -110,7 +110,8 @@ const Table = (props) => {
 
 const Rows = (props) => {
 
-  const ref = useRef()
+  // const ref = useRef()
+  const [deleteRow, setDeleteRow] = useState({ index: -1 })
   const [datos, setDatos] = useState([])
   const { tipo } = props
   useEffect(() => {
@@ -127,10 +128,10 @@ const Rows = (props) => {
 
 
   useEffect(() => {
-    console.log(tipo)
     if (props.showNewRow) {
+      // console.log(tipo);
       (tipo === "movimientos") ?
-        setDatos([{ nombre: "d", tipo: "s", id: 0 }, ...datos]) :
+        setDatos([{ nombre: "", tipo: "", id: 0 }, ...datos]) :
         setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: 0 }, ...datos])
 
       props.setShowNewRow(false)
@@ -138,14 +139,38 @@ const Rows = (props) => {
 
   }, [props.showNewRow])
 
-  console.log(datos)
-  // console.log(ref)
+  useEffect(() => {
+    console.log("delete");
+    if (deleteRow.index !== -1) {
+      //borrar
+      (deleteRow.index === 0) ?
+        setDatos([...datos.slice(0)]) :
+        (deleteRow.index === datos.length - 1) ?
+          setDatos([...datos.slice(0, datos.length - 1)]) :
+          setDatos([...datos.slice(0, deleteRow.index), ...datos.slice(deleteRow.index)])
+
+      setDeleteRow({ index: -1 })
+    }
+
+  }, [deleteRow])
+  // useEffect(() => {
+
+  //   if (ref.current !== undefined) {
+
+  //     // console.log(ref.current)
+  //     let index = ref.current.handleDelete()
+  //     console.log(index)
+  //   }
+  // }, [ref.current])
+
+
+  // console.log(deleteRow)
 
   return (
     <>
       {datos.map((row, index) => {
         return (
-          <RowData ref={ref} index={index} key={index} type={tipo} row={row} />
+          <RowData index={index} key={index} type={tipo} row={row} setDeleteRow={setDeleteRow} />
         )
       })}
     </>
@@ -156,39 +181,57 @@ const Rows = (props) => {
 
 
 
-const RowData = forwardRef((props, ref) => {
+const RowData = (props) => {// forwardRef((props, ref) => {
   const { index } = props
   const [visible, setVisible] = useState(false)
   const { type } = props
-  const [nombre, setNombre] = useState(props.type == "movimientos" ? props.row.nombre : props.row.nombreCuenta)
-  const [tipo, setTipo] = useState(props.row.tipo)
-  const [id] = useState(props.row.id)
-  const [numero, setNumero] = useState(props.row.numero)
-  const [titular, setTitular] = useState(props.row.titular)
-  const [banco, setBanco] = useState(props.row.banco)
+  const [nombre, setNombre] = useState("")
+  const [tipo, setTipo] = useState("")
+  const [id, setId] = useState("")
+  const [numero, setNumero] = useState(0)
+  const [titular, setTitular] = useState("")
+  const [banco, setBanco] = useState("")
+
+  // const [nombre, setNombre] = useState(props.type == "movimientos" ? props.row.nombre : props.row.nombreCuenta)
+  // const [tipo, setTipo] = useState(props.row.tipo)
+  // const [id] = useState(props.row.id)
+  // const [numero, setNumero] = useState(props.row.numero)
+  // const [titular, setTitular] = useState(props.row.titular)
+  // const [banco, setBanco] = useState(props.row.banco)
 
   const hiddenWhenVisible = { display: visible ? "none" : "" }
-  const showWhenVisible = { display: visible ? "" : "none" }
+  // const showWhenVisible = { display: visible ? "" : "none" }
 
+  useEffect(() => {
+    setNombre(props.type == "movimientos" ? props.row.nombre : props.row.nombreCuenta)
+    setTipo(props.row.tipo)
+    setId(props.row.id)
+    setNumero(props.row.numero)
+    setTitular(props.row.titular)
+    setBanco(props.row.banco)
+
+  }, [props.row.nombre, props.row.tipo, props.row.id, props.row.numero, props.row.titular, props.row.banco])
 
   // console.log(index)
   //aqui realizo una solicitud post cuando se modifiquen los datos 
-  function handleDelete(e) {
+  const handleDelete = (e) => {
     e.preventDefault()
+    props.setDeleteRow({ index: index })
     setVisible(true)
     console.log("you clicked")
-    return index
   }
+  // console.log(handleDelete)
 
-  useImperativeHandle(ref, () => {
-    return handleDelete
-  }, [])
+  // useImperativeHandle(ref, () => {
+  // return { handleDelete }
+  // })
+  // console.log(props.row.nombre)
 
   return (
     <tr style={hiddenWhenVisible}>
       {type == "movimientos" ?
         <>
-          <td><input onChange={(e) => setNombre(e.target.value)} defaultValue={nombre} /></td>
+          <td><input onChange={(e) => setNombre(e.target.value)} value={nombre} /></td>
           <td><input onChange={(e) => setTipo(e.target.value)} defaultValue={tipo} /></td>
           <td>{id}</td>
           <td><button onClick={handleDelete} ><VscError size={20} /> </button></td>
@@ -205,7 +248,7 @@ const RowData = forwardRef((props, ref) => {
       }
     </tr>
   )
-})
+}//)
 
 
 
