@@ -110,7 +110,6 @@ const Table = (props) => {
 
 const Rows = (props) => {
 
-  // const ref = useRef()
   const [deleteRow, setDeleteRow] = useState({ index: -1 })
   const [datos, setDatos] = useState([])
   const { tipo } = props
@@ -118,18 +117,10 @@ const Rows = (props) => {
     setDatos([...props.data])
   }, [props.data])
 
-  // if (props.showNewRow) {
-  //   setDatos([{}, ...datos])
-  // }
-
-  // useEffect(() => {
-  //   setDatos([{}, ...datos])
-  // })
 
 
   useEffect(() => {
     if (props.showNewRow) {
-      // console.log(tipo);
       (tipo === "movimientos") ?
         setDatos([{ nombre: "", tipo: "", id: 0 }, ...datos]) :
         setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: 0 }, ...datos])
@@ -140,7 +131,6 @@ const Rows = (props) => {
   }, [props.showNewRow])
 
   useEffect(() => {
-    console.log("delete");
     if (deleteRow.index !== -1) {
       //borrar
       (deleteRow.index === 0) ?
@@ -153,18 +143,6 @@ const Rows = (props) => {
     }
 
   }, [deleteRow])
-  // useEffect(() => {
-
-  //   if (ref.current !== undefined) {
-
-  //     // console.log(ref.current)
-  //     let index = ref.current.handleDelete()
-  //     console.log(index)
-  //   }
-  // }, [ref.current])
-
-
-  // console.log(deleteRow)
 
   return (
     <>
@@ -192,12 +170,6 @@ const RowData = (props) => {// forwardRef((props, ref) => {
   const [titular, setTitular] = useState("")
   const [banco, setBanco] = useState("")
 
-  // const [nombre, setNombre] = useState(props.type == "movimientos" ? props.row.nombre : props.row.nombreCuenta)
-  // const [tipo, setTipo] = useState(props.row.tipo)
-  // const [id] = useState(props.row.id)
-  // const [numero, setNumero] = useState(props.row.numero)
-  // const [titular, setTitular] = useState(props.row.titular)
-  // const [banco, setBanco] = useState(props.row.banco)
 
   const hiddenWhenVisible = { display: visible ? "none" : "" }
   // const showWhenVisible = { display: visible ? "" : "none" }
@@ -212,36 +184,29 @@ const RowData = (props) => {// forwardRef((props, ref) => {
 
   }, [props.row.nombre, props.row.tipo, props.row.id, props.row.numero, props.row.titular, props.row.banco])
 
-  // console.log(index)
-  //aqui realizo una solicitud post cuando se modifiquen los datos 
   const handleDelete = (e) => {
+    //aqui realizo una solicitud post cuando se modifiquen los datos 
     e.preventDefault()
     props.setDeleteRow({ index: index })
     setVisible(true)
     console.log("you clicked")
   }
-  // console.log(handleDelete)
-
-  // useImperativeHandle(ref, () => {
-  // return { handleDelete }
-  // })
-  // console.log(props.row.nombre)
 
   return (
     <tr style={hiddenWhenVisible}>
       {type == "movimientos" ?
         <>
-          <td><input onChange={(e) => setNombre(e.target.value)} value={nombre} /></td>
-          <td><input onChange={(e) => setTipo(e.target.value)} defaultValue={tipo} /></td>
+          <td><input onChange={(e) => setNombre(e.target.value)} type="text" value={nombre} /></td>
+          <td><input onChange={(e) => setTipo(e.target.value)} type="text" defaultValue={tipo} /></td>
           <td>{id}</td>
           <td><button onClick={handleDelete} ><VscError size={20} /> </button></td>
         </>
         :
         <>
-          <td><input onChange={(e) => setNombre(e.target.value)} defaultValue={nombre} /></td>
-          <td><input onChange={(e) => setNumero(e.target.value)} defaultValue={numero} /></td>
-          <td><input onChange={(e) => setTitular(e.target.value)} defaultValue={titular} /></td>
-          <td><input onChange={(e) => setBanco(e.target.value)} defaultValue={banco} /></td>
+          <td><input onChange={(e) => setNombre(e.target.value)} type="text" defaultValue={nombre} /></td>
+          <td><input onChange={(e) => setNumero(e.target.value)} type="number" defaultValue={numero} /></td>
+          <td><input onChange={(e) => setTitular(e.target.value)} type="text" defaultValue={titular} /></td>
+          <td><input onChange={(e) => setBanco(e.target.value)} type="text" defaultValue={banco} /></td>
           <td>{id}</td>
           <td><button onClick={handleDelete} > <VscError size={20} /></button></td>
         </>
