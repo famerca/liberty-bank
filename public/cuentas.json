@@ -1,0 +1,176 @@
+[
+    {
+        "nombre": "Nombre de la Cuenta",
+        "numero": "2051-5021-2114-521015",
+        "banco": "Banco",
+        "titular": "Holder",
+        "saldos":
+        {
+            "total":1000,
+            "egresos": 500,
+            "ingresos": 800
+        },
+        "transacciones": []
+    },
+    {
+        "nombre": "cuenta de pagos",
+        "numero": "2051-5021-2104-521015",
+        "banco": "Bank of america",
+        "titular": "Luis",
+        "saldos":
+        {
+            "total":3000,
+            "egresos": 1000,
+            "ingresos": 100
+        },
+        "transacciones": []
+    },
+    {
+        "nombre": "cuenta de cobros",
+        "numero": "2051-5011-2104-521015",
+        "banco": "BBVA",
+        "titular": "Daniel",
+        "saldos":
+        {
+            "total":1000,
+            "egresos": 100,
+            "ingresos": 8000
+        },
+        "transacciones": [
+            {
+                "concepto" : "Concepto",
+                "categoria" : "Alquiler",
+                "referencia" : "15641466",
+                "fecha" : "2014-41-14",
+                "cuenta" : "Cuenta de cobros",
+                "monto" : 451,
+                "tipo" : "ingreso"
+            },
+            {
+                "concepto" : "Concepto",
+                "categoria" : "Alquiler",
+                "referencia" : "15641466",
+                "fecha" : "2014-41-14",
+                "cuenta" : "Cuenta de cobros",
+                "monto" : 451,
+                "tipo" : "ingreso"
+            },
+            {
+                "concepto" : "Concepto",
+                "categoria" : "Alquiler",
+                "referencia" : "15641466",
+                "fecha" : "2014-41-14",
+                "cuenta" : "Cuenta de cobros",
+                "monto" : 400,
+                "tipo" : "egreso"
+            },
+            {
+                "concepto" : "Concepto",
+                "categoria" : "Alquiler",
+                "referencia" : "15641466",
+                "fecha" : "2014-41-14",
+                "cuenta" : "Cuenta de cobros",
+                "monto" : 451,
+                "tipo" : "ingreso"
+            }
+        ]
+    },{
+        "nombre": "cuenta de negocios",
+        "numero": "2051-4021-2104-521815",
+        "banco": "WELLS FARGO",
+        "titular": "Fabian",
+        "saldos":
+        {
+            "total":10000,
+            "egresos": 100,
+            "ingresos": 800
+        },
+        "transacciones": [
+            {
+                "concepto" : "Concepto",
+                "categoria" : "Alquiler",
+                "referencia" : "15641466",
+                "fecha" : "2014-41-14",
+                "cuenta" : "Cuenta de cobros",
+                "monto" : 41,
+                "tipo" : "egreso"
+            },
+            {
+                "concepto" : "Concepto",
+                "categoria" : "Alquiler",
+                "referencia" : "15641466",
+                "fecha" : "2014-41-14",
+                "cuenta" : "Cuenta de cobros",
+                "monto" : 451,
+                "tipo" : "ingreso"
+            },
+            {
+                "concepto" : "pago a jenofer",
+                "categoria" : "Alquiler",
+                "referencia" : "15641466",
+                "fecha" : "2014-41-14",
+                "cuenta" : "Cuenta de cobros",
+                "monto" : 401,
+                "tipo" : "egreso"
+            },
+            {
+                "concepto" : "Concepto",
+                "categoria" : "Alquiler",
+                "referencia" : "15641466",
+                "fecha" : "2014-41-14",
+                "cuenta" : "Cuenta de cobros",
+                "monto" : 451,
+                "tipo" : "ingreso"
+            }
+        ]
+    },{
+        "nombre": "cuenta de administracion",
+        "numero": "2051-4121-2109-521815",
+        "banco": "Credit suiss",
+        "titular": "jennifer",
+        "saldos":
+        {
+            "total":10000,
+            "egresos": 100,
+            "ingresos": 800
+        },
+        "transacciones": [
+            {
+                "concepto" : "Concepto",
+                "categoria" : "Alquiler",
+                "referencia" : "15641466",
+                "fecha" : "2014-41-14",
+                "cuenta" : "Cuenta de cobros",
+                "monto" : 451,
+                "tipo" : "ingreso"
+            },
+            {
+                "concepto" : "Concepto",
+                "categoria" : "Alquiler",
+                "referencia" : "15641466",
+                "fecha" : "2014-41-14",
+                "cuenta" : "Cuenta de cobros",
+                "monto" : 451,
+                "tipo" : "ingreso"
+            },
+            {
+                "concepto" : "pago a jenofer",
+                "categoria" : "Alquiler",
+                "referencia" : "15641466",
+                "fecha" : "2014-41-14",
+                "cuenta" : "Cuenta de cobros",
+                "monto" : 401,
+                "tipo" : "egreso"
+            },
+            {
+                "concepto" : "Mantenimiento",
+                "categoria" : "Instalcion",
+                "referencia" : "15641466",
+                "fecha" : "2014-41-14",
+                "cuenta" : "Cuenta de cobros",
+                "monto" : 451,
+                "tipo" : "ingreso"
+            }
+        ]
+    }
+]
