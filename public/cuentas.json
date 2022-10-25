@@ -91,7 +91,7 @@
                 "categoria" : "Alquiler",
                 "referencia" : "15641466",
                 "fecha" : "2014-41-14",
-                "cuenta" : "Cuenta de cobros",
+                "cuenta" : "Cuenta de negocios",
                 "monto" : 41,
                 "tipo" : "egreso"
             },
@@ -100,7 +100,7 @@
                 "categoria" : "Alquiler",
                 "referencia" : "15641466",
                 "fecha" : "2014-41-14",
-                "cuenta" : "Cuenta de cobros",
+                "cuenta" : "Cuenta de negocios",
                 "monto" : 451,
                 "tipo" : "ingreso"
             },
@@ -109,7 +109,7 @@
                 "categoria" : "Alquiler",
                 "referencia" : "15641466",
                 "fecha" : "2014-41-14",
-                "cuenta" : "Cuenta de cobros",
+                "cuenta" : "Cuenta de negocios",
                 "monto" : 401,
                 "tipo" : "egreso"
             },
@@ -118,7 +118,7 @@
                 "categoria" : "Alquiler",
                 "referencia" : "15641466",
                 "fecha" : "2014-41-14",
-                "cuenta" : "Cuenta de cobros",
+                "cuenta" : "Cuenta de negocios",
                 "monto" : 451,
                 "tipo" : "ingreso"
             }
@@ -140,7 +140,7 @@
                 "categoria" : "Alquiler",
                 "referencia" : "15641466",
                 "fecha" : "2014-41-14",
-                "cuenta" : "Cuenta de cobros",
+                "cuenta" : "Cuenta de administracion",
                 "monto" : 451,
                 "tipo" : "ingreso"
             },
@@ -149,7 +149,7 @@
                 "categoria" : "Alquiler",
                 "referencia" : "15641466",
                 "fecha" : "2014-41-14",
-                "cuenta" : "Cuenta de cobros",
+                "cuenta" : "Cuenta de administracion",
                 "monto" : 451,
                 "tipo" : "ingreso"
             },
@@ -158,7 +158,7 @@
                 "categoria" : "Alquiler",
                 "referencia" : "15641466",
                 "fecha" : "2014-41-14",
-                "cuenta" : "Cuenta de cobros",
+                "cuenta" : "Cuenta de administracion",
                 "monto" : 401,
                 "tipo" : "egreso"
             },
@@ -167,7 +167,7 @@
                 "categoria" : "Instalcion",
                 "referencia" : "15641466",
                 "fecha" : "2014-41-14",
-                "cuenta" : "Cuenta de cobros",
+                "cuenta" : "Cuenta de administracion",
                 "monto" : 451,
                 "tipo" : "ingreso"
             }
