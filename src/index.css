@@ -20,29 +20,29 @@ code {
   box-sizing: border-box;
 }
 
-.row {
-  display: grid;
-  text-align: center;
-  align-content: center;
-  align-items: center;
-}
+/* .row { */
+/*   display: grid; */
+/*   text-align: center; */
+/*   align-content: center; */
+/*   align-items: center; */
+/* } */
 
-  .startText{
-  text-align: start;
-}
+/*   .startText{ */
+/*   text-align: start; */
+/* } */
 
-th{
-  font-size: calc(50%);
-}
-.scroll{
-  overflow-y: scroll;
-  width: 100%;
-  height: auto;
-}
+/* th{ */
+/*   font-size: calc(50%); */
+/* } */
+/* .scroll{ */
+/*   overflow-y: scroll; */
+/*   width: 100%; */
+/*   height: auto; */
+/* } */
 
-.inputRow{
-  width: 100%;
-  background-color: transparent;
-  
-  border:none;
-}
+/* .inputRow{ */
+/*   width: 100%; */
+/*   background-color: transparent; */
+/*    */
+/*   border:none; */
+/* } */

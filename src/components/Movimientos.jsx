@@ -48,8 +48,9 @@ let datosCuentas = [
 
 
 const Movimientos = () => {
+  const tablesStyle = { width: "100% !important", height: "100% !important", display: "grid", gridTemplateColumns: "1fr 2fr", gridGap: "10px", padding: "20px", backgroundColor: "rgba(155,155,155,0.3)" }
   return (
-    <div style={{ width: "100% !important", height: "100% !important", display: "grid", gridTemplateColumns: "1fr 2fr", gridGap: "10px", padding: "20px", backgroundColor: "rgba(155,155,155,0.3)" }}>
+    <div style={tablesStyle}>
       <Table type="movimientos" datos={datosCategorias} />
       <Table type="cuentas" datos={datosCuentas} />
     </div >
@@ -61,6 +62,9 @@ const Table = (props) => {
   const [datos, setDatos] = useState([])
   const [tipo, setTipo] = useState("")
 
+  const trStyle = { width: "auto", display: "grid", gridTemplateColumns: (tipo === "movimientos") ? "repeat(10,1fr)" : "repeat(18,1fr)", gridGap: "2px", textAlign: "start", position: "sticky", top: "51px", backgroundColor: "white" }
+  const thStyle = { textAlign: "start", fontSize: "calc(55%)" }
+
   useEffect(() => {
     //   //fetch a api
     //   //api que va a traer datos del backend
@@ -71,32 +75,35 @@ const Table = (props) => {
 
 
   const head = tipo === "movimientos" ?
-    <tr style={{ width: "auto", display: "grid", gridTemplateColumns: "repeat(10,1fr)", gridGap: "2px", textAlign: "start", position: "sticky", top: "51px", backgroundColor: "white" }}>
-      <th className="startText" style={{ gridColumn: "1/6" }} >Nombre</th>
-      <th className="startText" style={{ gridColumn: "6/9" }}>Tipo</th>
-      <th className="startText" style={{ gridColumn: "9" }}>Id</th>
-      <th className="startText" style={{ gridColumn: "10" }}>Accion</th>
+    <tr style={trStyle}>
+      <th style={{ gridColumn: "1/6", ...thStyle }} >Nombre</th>
+      <th style={{ gridColumn: "6/9", ...thStyle }}>Tipo</th>
+      <th style={{ gridColumn: "9", ...thStyle }}>Id</th>
+      <th style={{ gridColumn: "10", ...thStyle }}>Accion</th>
     </tr >
-    : <tr style={{ width: "100%", display: "grid", gridTemplateColumns: "repeat(18,1fr)", gridGap: "2px", textAlign: "start", position: "sticky", top: "51px", backgroundColor: "white" }}>
-      <th className="startText" style={{ gridColumn: "1/6" }} >Nombre</th>
-      <th className="startText" style={{ gridColumn: "6/10" }} >Numero</th>
-      <th className="startText" style={{ gridColumn: "10/14" }} >Titular</th>
-      <th className="startText" style={{ gridColumn: "14/17" }} >Banco</th>
-      <th className="startText" style={{ gridColumn: "17" }} >id</th>
-      <th className="startText" style={{ gridColumn: "18" }} >Accion</th>
+    : <tr style={trStyle}>
+      <th style={{ gridColumn: "1/6", ...thStyle }} >Nombre</th>
+      <th style={{ gridColumn: "6/10", ...thStyle }} >Numero</th>
+      <th style={{ gridColumn: "10/14", ...thStyle }} >Titular</th>
+      <th style={{ gridColumn: "14/17", ...thStyle }} >Banco</th>
+      <th style={{ gridColumn: "17", ...thStyle }} >id</th>
+      <th style={{ gridColumn: "18", ...thStyle }} >Accion</th>
     </tr>
 
-  // console.log(datos)
+  const boxContainerStyle = { width: "100%", maxHeight: "85vh", borderWidth: "1px", borderStyle: "outset", borderColor: "black", borderRadius: "8px", padding: "5px", paddingTop: "0px", overflowY: "scroll", backgroundColor: "white" }
+  const boxTitle = { display: "flex", position: "sticky", top: "0px", backgroundColor: "white", justifyContent: "space-between", padding: "0px 10px" }
+  const h1Title = { fontWeight: 1000, fontSize: "20px" }
+  const buttonTitleStyle = { border: "none", background: "none" }
+  const tableStyle = { width: "100%", display: "flex", flexDirection: "column" }
 
   return (
-    <div style={{ width: "100%", maxHeight: "85vh", borderWidth: "1px", borderStyle: "outset", borderColor: "black", borderRadius: "8px", padding: "5px", paddingTop: "0px", overflowY: "scroll", backgroundColor: "white" }}>
-      <div style={{ display: "flex", position: "sticky", top: "0px", backgroundColor: "white", justifyContent: "space-between", padding: "0px 10px" }}>
-        <h1 style={{ fontWeight: 1000, fontSize: "20px" }} >{tipo === "movimientos" ? "Categorias" : "Cuentas"}</h1>
-        <button onClick={() => setNewRow(true)} style={{ border: "none", background: "none" }}><AiFillPlusCircle size={20} /></button>
+    <div style={boxContainerStyle}>
+      <div style={boxTitle}>
+        <h1 style={h1Title} >{tipo === "movimientos" ? "Categorias" : "Cuentas"}</h1>
+        <button onClick={() => setNewRow(true)} style={buttonTitleStyle}><AiFillPlusCircle size={20} /></button>
       </div>
-      <table className="" style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+      <table style={tableStyle}>
         {head}
-        {/* <Row data={datos} /> */}
         {datos.length === 0 ? <label> loading ....</label> :
           <Rows setShowNewRow={setNewRow} showNewRow={newRow} data={datos} tipo={tipo} />
         }
@@ -109,6 +116,8 @@ const Table = (props) => {
 
 const Rows = (props) => {
 
+  const { setShowNewRow, showNewRow } = props
+
   const [deleteRow, setDeleteRow] = useState({ index: -1 })
   const [datos, setDatos] = useState([])
   const { tipo } = props
@@ -119,16 +128,16 @@ const Rows = (props) => {
 
 
   useEffect(() => {
-    if (props.showNewRow) {
+    if (showNewRow) {
       // console.log(dtos);
       (tipo === "movimientos") ?
         setDatos([{ nombre: "", tipo: "", id: 0 }, ...datos]) :
         setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: 0 }, ...datos])
 
-      props.setShowNewRow(false)
+      setShowNewRow(false)
     }
 
-  }, [props.showNewRow])
+  }, [showNewRow, datos, tipo, setShowNewRow])
 
   useEffect(() => {
     if (deleteRow.index !== -1) {
@@ -143,7 +152,7 @@ const Rows = (props) => {
       setDeleteRow({ index: -1 })
     }
 
-  }, [deleteRow])
+  }, [deleteRow, datos])
 
   console.log(datos)
   return (
@@ -163,7 +172,6 @@ const Rows = (props) => {
 
 const RowData = (props) => {// forwardRef((props, ref) => {
   const { index } = props
-  const [visible, setVisible] = useState(false)
   const { type } = props
   const [nombre, setNombre] = useState("")
   const [tipo, setTipo] = useState("")
@@ -172,44 +180,48 @@ const RowData = (props) => {// forwardRef((props, ref) => {
   const [titular, setTitular] = useState("")
   const [banco, setBanco] = useState("")
 
+  const trStyle = { display: "grid", textAlign: "center", alignContent: "center", alignItems: "center", width: "100%", gridTemplateColumns: (type === "movimientos") ? "repeat(10,1fr)" : "repeat(18,1fr)", gridGap: "2px", borderTop: " 1px inset #000", borderBottom: " 1px inset #000" }
+  const inputStyle = { width: "100%", backgroundColor: "transparent", border: "none" }
+  const buttonStyle = { border: "none", background: "none" }
+
+  const { type: type_, row } = props
 
   // const hiddenWhenVisible = { display: visible ? "none" : "" }
   // const showWhenVisible = { display: visible ? "" : "none" }
 
   useEffect(() => {
-    setNombre(props.type === "movimientos" ? props.row.nombre : props.row.nombreCuenta)
-    setTipo(props.row.tipo)
-    setId(props.row.id)
-    setNumero(props.row.numero)
-    setTitular(props.row.titular)
-    setBanco(props.row.banco)
+    setNombre(type_ === "movimientos" ? row.nombre : row.nombreCuenta)
+    setTipo(row.tipo)
+    setId(row.id)
+    setNumero(row.numero)
+    setTitular(row.titular)
+    setBanco(row.banco)
 
-  }, [props.row.nombre, props.row.tipo, props.row.id, props.row.numero, props.row.titular, props.row.banco])
+  }, [row, type_])
 
   const handleDelete = (e) => {
-    //aqui realizo una solicitud post cuando se modifiquen los datos 
+    //aqui realizo una solicitud post cuando se modifiquen los datos  
     e.preventDefault()
     props.setDeleteRow({ index: index })
-    setVisible(true)
   }
 
   return (
     <>
       {type === "movimientos" ?
-        <tr className="row" style={{ display: "grid", width: "100%", gridTemplateColumns: "repeat(10,1fr)", gridGap: "2px", borderTop: " 1px inset #000", borderBottom: " 1px inset #000" }}>
-          <td className="startText" style={{ gridColumn: "1/6" }} ><input className="inputRow" onChange={(e) => setNombre(e.target.value)} type="text" value={nombre} /> </td>
-          <td className="startText" style={{ gridColumn: "6/9" }}><input className="inputRow" onChange={(e) => setTipo(e.target.value)} type="text" defaultValue={tipo} /></td>
-          <td className="startText" style={{ gridColumn: "9", fontSize: "calc(60%)" }}>{id}</td>
-          <td className="startText" style={{ gridColumn: "10" }} >  <button style={{ border: "none", background: "none" }} onClick={handleDelete}  ><VscError size={20} /> </button> </td>
+        <tr style={trStyle}>
+          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} type="text" value={nombre} /> </td>
+          <td style={{ gridColumn: "6/9", textAlign: "start" }}><input style={inputStyle} onChange={(e) => setTipo(e.target.value)} type="text" defaultValue={tipo} /></td>
+          <td style={{ gridColumn: "9", fontSize: "calc(60%)", textAlign: "start" }}>{id}</td>
+          <td style={{ gridColumn: "10", textAlign: "start" }} >  <button style={buttonStyle} onClick={handleDelete}  ><VscError size={20} /> </button> </td>
         </tr>
         :
-        <tr className="row" style={{ width: "100%", display: "grid", gridTemplateColumns: "repeat(18,1fr)", gridGap: "2px", borderTop: " 1px inset #000", borderBottom: " 1px inset #000" }}>
-          <td className="startText" style={{ gridColumn: "1/6" }} ><input className="inputRow" onChange={(e) => setNombre(e.target.value)} type="text" defaultValue={nombre} /></td>
-          <td className="startText" style={{ gridColumn: "6/10" }} ><input className="inputRow" onChange={(e) => setNumero(e.target.value)} type="text" defaultValue={numero} /></td>
-          <td className="startText" style={{ gridColumn: "10/14" }} ><input className="inputRow" onChange={(e) => setTitular(e.target.value)} type="text" defaultValue={titular} /></td>
-          <td className="startText" style={{ gridColumn: "14/17" }} ><input className="inputRow" onChange={(e) => setBanco(e.target.value)} type="text" defaultValue={banco} /></td>
-          <td className="startText" style={{ gridColumn: "17", fontSize: "calc(60%)" }}  >{id}</td>
-          <td className="startText" style={{ gridColumn: "18" }} ><button style={{ border: "none", background: "none" }} onClick={handleDelete} > <VscError size={20} /></button></td>
+        <tr style={trStyle}>
+          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} type="text" defaultValue={nombre} /></td>
+          <td style={{ gridColumn: "6/10", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNumero(e.target.value)} type="text" defaultValue={numero} /></td>
+          <td style={{ gridColumn: "10/14", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setTitular(e.target.value)} type="text" defaultValue={titular} /></td>
+          <td style={{ gridColumn: "14/17", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setBanco(e.target.value)} type="text" defaultValue={banco} /></td>
+          <td style={{ gridColumn: "17", fontSize: "calc(60%)", textAlign: "start" }}  >{id}</td>
+          <td style={{ gridColumn: "18", textAlign: "start" }} ><button style={buttonStyle} onClick={handleDelete} > <VscError size={20} /></button></td>
         </tr>
       }
     </>
