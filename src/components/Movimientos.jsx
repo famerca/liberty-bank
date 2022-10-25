@@ -45,9 +45,11 @@ let datosCuentas = [
   { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
   { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
 ]
+
+
 const Movimientos = () => {
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ width: "100% !important", height: "100% !important", display: "grid", gridTemplateColumns: "1fr 2fr", gridGap: "10px", padding: "20px", backgroundColor: "rgba(155,155,155,0.3)" }}>
       <Table type="movimientos" datos={datosCategorias} />
       <Table type="cuentas" datos={datosCuentas} />
     </div >
@@ -67,42 +69,39 @@ const Table = (props) => {
     setTipo(props.type)
   }, [props.datos, props.type])
 
+
   const head = tipo === "movimientos" ?
-    <tr >
-      <th>Nombre</th>
-      <th>Tipo</th>
-      <th>Id</th>
-      <th>Acciones</th>
-    </tr>
-    : <tr>
-      <th>Nombre</th>
-      <th>Numero</th>
-      <th>Titular</th>
-      <th>Banco</th>
-      <th>id</th>
-      <th>Acciones</th>
+    <tr style={{ width: "auto", display: "grid", gridTemplateColumns: "repeat(10,1fr)", gridGap: "2px", textAlign: "start", position: "sticky", top: "51px", backgroundColor: "white" }}>
+      <th className="startText" style={{ gridColumn: "1/6" }} >Nombre</th>
+      <th className="startText" style={{ gridColumn: "6/9" }}>Tipo</th>
+      <th className="startText" style={{ gridColumn: "9" }}>Id</th>
+      <th className="startText" style={{ gridColumn: "10" }}>Accion</th>
+    </tr >
+    : <tr style={{ width: "100%", display: "grid", gridTemplateColumns: "repeat(18,1fr)", gridGap: "2px", textAlign: "start", position: "sticky", top: "51px", backgroundColor: "white" }}>
+      <th className="startText" style={{ gridColumn: "1/6" }} >Nombre</th>
+      <th className="startText" style={{ gridColumn: "6/10" }} >Numero</th>
+      <th className="startText" style={{ gridColumn: "10/14" }} >Titular</th>
+      <th className="startText" style={{ gridColumn: "14/17" }} >Banco</th>
+      <th className="startText" style={{ gridColumn: "17" }} >id</th>
+      <th className="startText" style={{ gridColumn: "18" }} >Accion</th>
     </tr>
 
   // console.log(datos)
 
   return (
-    <div>
-      <div style={{ display: "flex" }}>
-        <h1 style={{ fontWeight: 1000, fontSize: "20px" }} >Categorias</h1>
-        <button onClick={() => setNewRow(true)} style={{ border: "none" }}><AiFillPlusCircle size={20} /></button>
+    <div style={{ width: "100%", maxHeight: "85vh", borderWidth: "1px", borderStyle: "outset", borderColor: "black", borderRadius: "8px", padding: "5px", paddingTop: "0px", overflowY: "scroll", backgroundColor: "white" }}>
+      <div style={{ display: "flex", position: "sticky", top: "0px", backgroundColor: "white", justifyContent: "space-between", padding: "0px 10px" }}>
+        <h1 style={{ fontWeight: 1000, fontSize: "20px" }} >{tipo === "movimientos" ? "Categorias" : "Cuentas"}</h1>
+        <button onClick={() => setNewRow(true)} style={{ border: "none", background: "none" }}><AiFillPlusCircle size={20} /></button>
       </div>
-      <table>
-        <thead>
-          {head}
-        </thead>
-        <tbody>
-          {/* <Row data={datos} /> */}
-          {datos.length === 0 ? <label> loading ....</label> :
-            <Rows setShowNewRow={setNewRow} showNewRow={newRow} data={datos} tipo={tipo} />
-          }
-        </tbody>
+      <table className="" style={{ width: "100%", display: "flex", flexDirection: "column" }}>
+        {head}
+        {/* <Row data={datos} /> */}
+        {datos.length === 0 ? <label> loading ....</label> :
+          <Rows setShowNewRow={setNewRow} showNewRow={newRow} data={datos} tipo={tipo} />
+        }
       </table>
-    </div>
+    </div >
 
   )
 
@@ -121,6 +120,7 @@ const Rows = (props) => {
 
   useEffect(() => {
     if (props.showNewRow) {
+      // console.log(dtos);
       (tipo === "movimientos") ?
         setDatos([{ nombre: "", tipo: "", id: 0 }, ...datos]) :
         setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: 0 }, ...datos])
@@ -132,18 +132,20 @@ const Rows = (props) => {
 
   useEffect(() => {
     if (deleteRow.index !== -1) {
+      console.log("borrar ", deleteRow.index);
       //borrar
       (deleteRow.index === 0) ?
-        setDatos([...datos.slice(0)]) :
+        setDatos([...datos.slice(1)]) :
         (deleteRow.index === datos.length - 1) ?
-          setDatos([...datos.slice(0, datos.length - 1)]) :
-          setDatos([...datos.slice(0, deleteRow.index), ...datos.slice(deleteRow.index)])
+          setDatos([...datos.slice(0, datos.length - 2)]) :
+          setDatos([...datos.slice(0, deleteRow.index - 1), ...datos.slice(deleteRow.index + 1)])
 
       setDeleteRow({ index: -1 })
     }
 
   }, [deleteRow])
 
+  console.log(datos)
   return (
     <>
       {datos.map((row, index) => {
@@ -171,7 +173,7 @@ const RowData = (props) => {// forwardRef((props, ref) => {
   const [banco, setBanco] = useState("")
 
 
-  const hiddenWhenVisible = { display: visible ? "none" : "" }
+  // const hiddenWhenVisible = { display: visible ? "none" : "" }
   // const showWhenVisible = { display: visible ? "" : "none" }
 
   useEffect(() => {
@@ -192,25 +194,25 @@ const RowData = (props) => {// forwardRef((props, ref) => {
   }
 
   return (
-    <tr style={hiddenWhenVisible}>
+    <>
       {type === "movimientos" ?
-        <>
-          <td><input onChange={(e) => setNombre(e.target.value)} type="text" value={nombre} /></td>
-          <td><input onChange={(e) => setTipo(e.target.value)} type="text" defaultValue={tipo} /></td>
-          <td>{id}</td>
-          <td><button onClick={handleDelete} ><VscError size={20} /> </button></td>
-        </>
+        <tr className="row" style={{ display: "grid", width: "100%", gridTemplateColumns: "repeat(10,1fr)", gridGap: "2px", borderTop: " 1px inset #000", borderBottom: " 1px inset #000" }}>
+          <td className="startText" style={{ gridColumn: "1/6" }} ><input className="inputRow" onChange={(e) => setNombre(e.target.value)} type="text" value={nombre} /> </td>
+          <td className="startText" style={{ gridColumn: "6/9" }}><input className="inputRow" onChange={(e) => setTipo(e.target.value)} type="text" defaultValue={tipo} /></td>
+          <td className="startText" style={{ gridColumn: "9", fontSize: "calc(60%)" }}>{id}</td>
+          <td className="startText" style={{ gridColumn: "10" }} >  <button style={{ border: "none", background: "none" }} onClick={handleDelete}  ><VscError size={20} /> </button> </td>
+        </tr>
         :
-        <>
-          <td><input onChange={(e) => setNombre(e.target.value)} type="text" defaultValue={nombre} /></td>
-          <td><input onChange={(e) => setNumero(e.target.value)} type="number" defaultValue={numero} /></td>
-          <td><input onChange={(e) => setTitular(e.target.value)} type="text" defaultValue={titular} /></td>
-          <td><input onChange={(e) => setBanco(e.target.value)} type="text" defaultValue={banco} /></td>
-          <td>{id}</td>
-          <td><button onClick={handleDelete} > <VscError size={20} /></button></td>
-        </>
+        <tr className="row" style={{ width: "100%", display: "grid", gridTemplateColumns: "repeat(18,1fr)", gridGap: "2px", borderTop: " 1px inset #000", borderBottom: " 1px inset #000" }}>
+          <td className="startText" style={{ gridColumn: "1/6" }} ><input className="inputRow" onChange={(e) => setNombre(e.target.value)} type="text" defaultValue={nombre} /></td>
+          <td className="startText" style={{ gridColumn: "6/10" }} ><input className="inputRow" onChange={(e) => setNumero(e.target.value)} type="text" defaultValue={numero} /></td>
+          <td className="startText" style={{ gridColumn: "10/14" }} ><input className="inputRow" onChange={(e) => setTitular(e.target.value)} type="text" defaultValue={titular} /></td>
+          <td className="startText" style={{ gridColumn: "14/17" }} ><input className="inputRow" onChange={(e) => setBanco(e.target.value)} type="text" defaultValue={banco} /></td>
+          <td className="startText" style={{ gridColumn: "17", fontSize: "calc(60%)" }}  >{id}</td>
+          <td className="startText" style={{ gridColumn: "18" }} ><button style={{ border: "none", background: "none" }} onClick={handleDelete} > <VscError size={20} /></button></td>
+        </tr>
       }
-    </tr>
+    </>
   )
 }//)
 

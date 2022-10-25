@@ -7,6 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #efefef;
   font-size: calc(10px + 2vmin);
+  max-height: 100vh;
 
 }
 
@@ -17,4 +18,31 @@ code {
 
 *{
   box-sizing: border-box;
+}
+
+.row {
+  display: grid;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+}
+
+  .startText{
+  text-align: start;
+}
+
+th{
+  font-size: calc(50%);
+}
+.scroll{
+  overflow-y: scroll;
+  width: 100%;
+  height: auto;
+}
+
+.inputRow{
+  width: 100%;
+  background-color: transparent;
+  
+  border:none;
 }
