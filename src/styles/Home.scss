@@ -1,0 +1,207 @@
+@import "vars";
+
+.home-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: calc(100vh/3 - 1.67em);
+    gap: 0.8rem;
+    padding: 0.8rem;
+}
+.home-card
+{
+    background: white;
+    border-radius: 0.5rem;
+    overflow: auto;
+    padding: 0.5rem 0;
+    box-sizing: border-box;
+}
+.home-infocard
+{
+    padding: 1rem;
+}
+
+.home-infocard h2
+{
+    text-align: center;
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+
+.home-infocard p
+{
+    margin: 0.2rem 0;
+    color: var(--light-gray);
+    font-weight: 300;
+    font-size: 1.2rem;
+}
+
+.home-saldoscard
+{
+    grid-column: 2/4;
+    grid-row: 1/1;
+    padding: 0.2rem 0.8rem;
+}
+
+.home-saldoscard h2, .home-cuentascard .head h3, .home-transacciones .head h3
+{
+    margin: 0;
+    font-size: 1.3rem;
+    font-weight: 400;
+
+}
+
+.home-saldoscard .row
+{
+    display: flex;
+}
+
+.home-saldoscard .row .col-1
+{
+    flex-basis: 40%;
+}
+
+.home-saldoscard .row .col-2
+{
+    flex-basis: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-saldoscard .saldo-container
+{
+    text-align: center;
+}
+
+.home-saldoscard .saldo-container h3
+{
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.home-saldoscard .saldo-container h3.g
+{
+    font-size: 5rem;
+}
+.home-saldoscard .saldo-container span
+{
+    font-size: 1rem;
+    font-weight: 200;
+}
+
+.home-cuentascard
+{
+    grid-row: 2/4;
+}
+
+
+.home-cuentascard .head, .home-transacciones .head
+{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 .4rem;
+    margin-bottom: 0.4rem;
+}
+
+.home-cuentascard .head button, .home-transacciones .head button
+{
+    background: #12bfb1;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    font-weight: 700;
+    padding: 0.3rem 0.5rem;
+}
+
+.home-cuentascard .cuenta
+{
+    display: flex;
+    padding: 0.2rem 0;
+    border-top: solid 1px lightgray;
+    padding-bottom: 0.4rem;
+    cursor: pointer;
+}
+
+.home-cuentascard .cuenta:hover
+{
+    background-color: var(--hover-gray);
+}
+
+.home-cuentascard .cuenta > div
+{
+    flex-basis: 50%;
+    box-sizing: border-box;
+    padding: 0 0.4rem;
+}
+
+.home-cuentascard .cuenta p
+{
+    font-size: 0.8rem;
+    text-align: left;
+    margin: 0;
+    font-weight: 300;
+}
+
+.home-transacciones
+{
+    grid-column: 2/4;
+    grid-row: 2/4;
+}
+
+.home-transacciones .head button
+{
+    padding: 0 .2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.home-transacciones .head button svg
+{
+    width: 1.4em;
+    height: 1.4em;
+}
+
+.home-transacciones table.transacciones
+{
+    width: 100%;
+    background-color: var(--hover-gray);
+    border-collapse: collapse;
+}
+
+.home-transacciones table.transacciones th, .home-transacciones table.transacciones td
+{
+    font-weight: 400;
+    background: white;
+    text-align: center;
+    padding: 0.4rem;
+    font-size: 0.9rem;
+}
+
+.home-transacciones table.transacciones tr
+{
+    border: solid 1px lightgray;
+    border-left: none;
+    border-right: none;
+}
+.home-transacciones table.transacciones td
+{
+    font-weight: 300;
+    padding: 0.8rem 0.4rem;
+}
+
+.home-transacciones table.transacciones td.green
+{
+    color: var(--main-green);
+}
+.home-transacciones table.transacciones td.red
+{
+    color: var(--main-red);
+}
+
+.home-transacciones .tabla-container
+{
+    max-height: calc(100% - 40px);
+    overflow: auto;
+}
