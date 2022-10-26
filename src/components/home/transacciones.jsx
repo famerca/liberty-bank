@@ -12,7 +12,7 @@ const HomeTransacciones = ({trns}) => {
     return (
         <div className="home-card home-transacciones">
             <div className="head">
-                <h3>Cuentas</h3>
+                <h3>Transacciones</h3>
                 <button>
                     <IoFilterSharp/>
                 </button>
