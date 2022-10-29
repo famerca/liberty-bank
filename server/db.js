@@ -36,7 +36,7 @@ const query = (query) =>
         {
           if(err)
           {
-            console.log(err);
+            console.log("error: ", err);
             reject(err);
           }
           else

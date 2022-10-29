@@ -24,7 +24,9 @@ router.post("/cuentas/add", async (req, res) => {
   const { id_usuario } = req.body
   console.log(req.body)
 
-  await queryDB(`INSERT INTO db_cuentas( nombre , numero , titular , banco , id_usuario) VALUES ( '', '' , '', '', ${id_usuario})`).then(response => res.json(response))
+  await queryDB(`INSERT INTO db_cuentas( nombre , numero , titular , banco , id_usuario) VALUES ( '', '' , '', '', ${id_usuario})`)
+  .then(response => res.json(response))
+  .catch(err => res.json(err))
 })
 
 router.post("/categoria/add", async (req, res) => {
@@ -41,7 +43,7 @@ router.post("/cuentas/update", async (req, res) => {
   const { id, nombre, numero, titular, banco } = req.body
   console.log(req.body)
 
-  await queryDB(`UPDATE db_cuentas SET  nombre = '${nombre}', numero = '${numero}' , titular = '${titular}' , banco = '${banco}' WHERE id= '${id}'  `).then(response => res.json(response))
+  await queryDB(`UPDATE db_cuentas SET  nombre = '${nombre}', numero = '${numero}' , titular = '${titular}' , banco = '${banco}' WHERE id= '${id}' `).then(response => res.json(response))
 })
 
 router.post("/categoria/update", async (req, res) => {
