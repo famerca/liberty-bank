@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const pool = require("./../config/db")
+const DB = require("./db")
 // const mariadb = require("mariadb")
 
 // const pool = mariadb.createPool({
@@ -13,14 +13,8 @@ const pool = require("./../config/db")
 
 
 router.get("/api/movimientos", async (req, res) => {
-  let conn;
-  try {
-    conn = await pool.getConnection()
-    const datos = await conn.query("show tables;");
-    console.log(datos);
-  } catch (error) {
-    console.log(error)
-  }
+  DB.select("SELECT * FROM `bd_usuario`").then(x => console.log(x));
+  res.send("hello")
 })
 
 module.exports = router;

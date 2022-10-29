@@ -18,15 +18,15 @@ const path = require('path')
 //middleware
 app.use(cors())
 app.use(express.urlencoded({ extended: false }))
-app.use(express.static('build'))
+app.use(express.static('public'));
 
 
 //config
-app.set("port", process.env.PORT || 5000)
+app.set("port", process.env.PORT || 5500)
 
 
 //routes
-app.use("/", require("./routes/index"))
+app.use("/", require("./routes"))
 
 
 app.get('/', (req, res) => {
