@@ -7,7 +7,7 @@ const path = require('path')
 //middleware
 app.use(cors())
 app.use(express.urlencoded({ extended: false }))
-app.use(express.static('public'));
+app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 
 //config
@@ -18,8 +18,9 @@ app.set("port", process.env.PORT || 5020)
 app.use("/", require("./routes"))
 
 
+// console.log(path.resolve(__dirname, '..', 'public'))
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/build/index.html'))
+  res.sendFile(path.resolve(__dirname, '..', 'public/index.html'))
 })
 
 app.listen(app.get('port'), () => {
