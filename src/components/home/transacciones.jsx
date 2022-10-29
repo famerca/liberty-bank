@@ -1,6 +1,7 @@
 import '../../styles/Home.scss';
 import {IoFilterSharp} from 'react-icons/io5'
 import HomeTransaccion from './transaccion';
+import HomeFiltro from './filter';
 
 const HomeTransacciones = ({trns}) => {
   
@@ -16,6 +17,7 @@ const HomeTransacciones = ({trns}) => {
                 <button>
                     <IoFilterSharp/>
                 </button>
+                <HomeFiltro/>
             </div>
 
             <div className="tabla-container">

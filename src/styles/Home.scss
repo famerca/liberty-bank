@@ -102,6 +102,7 @@
     display: flex;
     justify-content: space-between;
     padding: 0 .4rem;
+    position: relative;
     margin-bottom: 0.4rem;
 }
 
@@ -204,4 +205,58 @@
 {
     max-height: calc(100% - 40px);
     overflow: auto;
+}
+
+.home-filter
+{
+    position: absolute;
+    width: 220px;
+    background: var(--very-light-gray);
+    padding: 0.5rem 0em;
+    padding-top: 0;
+    right: 1px;
+    top: 1.8rem;
+    box-shadow: 1px 1px 3px #7676768c;
+}
+.home-filter > label
+{
+    display: block;
+    border-bottom: solid 1px gainsboro;
+    padding: 0 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 300;
+    padding-bottom: 0.2rem;
+    margin-top: 0.6rem;
+    margin-bottom: 0.4rem;
+}
+.home-filter > select, .home-filter > div input
+{
+    display: block;
+    width: 96%;
+    margin: 0 auto;
+    outline: none;
+    background: white;
+    box-sizing: border-box;
+    padding: 0.2rem;
+    border-radius: 2px;
+    border: none;
+}
+.home-filter > div
+{
+    display: flex;
+    width: 96%;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.home-filter > div span
+{
+    font-size: .8rem;
+    font-weight: 300;
+}
+
+.home-filter > div input
+{
+    width: 80%;
+    margin: 0;
 }

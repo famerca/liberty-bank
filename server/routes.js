@@ -8,7 +8,7 @@ router.get("/usuarios", async (req, res) => {
 })
 
 router.get("/usuarios/prueba", async (req, res) => {
-  queryDB("UPDATE bd_usuario SET correo = 'pruebaupdate' where ID_usuario = 1")
+  queryDB("UPDATE bd_usuario SET correo = 'pruebaupdate' where I_usuario = 1")
   .then(x => res.send('ok'), err => res.send('error'))
 
 })
