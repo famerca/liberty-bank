@@ -8,9 +8,26 @@ const pool = mariadb.createPool({
 })
 
 
-class DB 
-{
-  static select(query)
+
+const select = (tabla, where = "1") =>
+  {
+    return new Promise( next =>{
+
+      pool.getConnection()
+      .then(conn => {
+  
+        conn.query(`SELECT * FROM  ${tabla} WHERE ${where}`)
+          .then((rows) => {
+            console.log(rows);
+            next(rows);
+          });
+          
+      }).catch(err => {
+        console.log("no se conecto");
+      });
+    })
+  }
+const query = (query) =>
   {
     return new Promise( next =>{
 
@@ -18,9 +35,10 @@ class DB
       .then(conn => {
   
         conn.query(query)
-          .then((rows) => {
-            next(rows);
-          })
+          .then((res) => {
+            console.log(rows);
+            next(res);
+          }).catch(err => console.log('Error:',err));
           
       }).catch(err => {
         console.log("no se conecto");
@@ -28,8 +46,9 @@ class DB
     })
   }
 
-}
 
 
-module.exports = DB;
+
+module.exports.selectDB = select;
+module.exports.queryDB = query;
 

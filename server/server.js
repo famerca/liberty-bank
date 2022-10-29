@@ -4,17 +4,6 @@ const cors = require('cors')
 require('dotenv').config
 const path = require('path')
 
-// const connectDB = require('./config/db')
-
-// const pool = require("./config/db")
-//conect to data base
-// connectDB.then(conn => {
-//   conn.query("show tables;").then(tables => {
-//     console.log(tables)
-//   })
-
-// })
-
 //middleware
 app.use(cors())
 app.use(express.urlencoded({ extended: false }))
@@ -22,7 +11,7 @@ app.use(express.static('public'));
 
 
 //config
-app.set("port", process.env.PORT || 5500)
+app.set("port", process.env.PORT || 5020)
 
 
 //routes
