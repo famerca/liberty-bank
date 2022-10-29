@@ -1,5 +1,5 @@
-const mariadb = require("mariadb")
-const pool = mariadb.createPool({
+const mysql = require("mysql")
+const conn = mysql.createConnection({
   host: "sql5.freesqldatabase.com",
   user: "sql5530096",
   password: "jbXQIreGYh",
@@ -11,41 +11,42 @@ const pool = mariadb.createPool({
 
 const select = (tabla, where = "1") =>
   {
-    return new Promise( next =>{
-
-      pool.getConnection()
-      .then(conn => {
+    return new Promise( (next, reject) =>{
   
-        conn.query(`SELECT * FROM  ${tabla} WHERE ${where}`)
-          .then((rows) => {
-            console.log(rows);
-            next(rows);
-          });
-          
-      }).catch(err => {
-        console.log("no se conecto");
-      });
+        conn.query(`SELECT * FROM  ${tabla} WHERE ${where}`, (err, res, fields) => {
+          if(err)
+          {
+            console.log("error:", err);
+            reject();
+          }
+          else
+          {
+            console.log(res);
+            next(res);
+          }
+        })  
     })
   }
 const query = (query) =>
   {
-    return new Promise( next =>{
+    return new Promise( (next, reject) =>{
 
-      pool.getConnection()
-      .then(conn => {
-  
-        conn.query(query)
-          .then((res) => {
-            console.log(rows);
+
+        conn.query(query, (err, res, filds) => 
+        {
+          if(err)
+          {
+            console.log(err);
+            reject(err);
+          }
+          else
+          {
             next(res);
-          }).catch(err => console.log('Error:',err));
-          
-      }).catch(err => {
-        console.log("no se conecto");
-      });
+          }
+        });
+
     })
   }
-
 
 
 
