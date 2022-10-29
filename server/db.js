@@ -9,42 +9,45 @@ const pool = mariadb.createPool({
 
 
 
-const select = (tabla, where = "1") =>
-  {
-    return new Promise( next =>{
+const select = (tabla, where = "1") => {
+  return new Promise(next => {
 
-      pool.getConnection()
+    pool.getConnection()
       .then(conn => {
-  
         conn.query(`SELECT * FROM  ${tabla} WHERE ${where}`)
           .then((rows) => {
             console.log(rows);
             next(rows);
           });
-          
+
       }).catch(err => {
         console.log("no se conecto");
       });
-    })
-  }
-const query = (query) =>
-  {
-    return new Promise( next =>{
+  })
+}
+const query = (query) => {
+  return new Promise(next => {
 
-      pool.getConnection()
+    pool.getConnection()
       .then(conn => {
-  
+
         conn.query(query)
           .then((res) => {
-            console.log(rows);
-            next(res);
-          }).catch(err => console.log('Error:',err));
-          
+            console.log(res);
+            next(1);
+          }).catch(err => {
+            console.log('Error:', err)
+            next(0)
+          }
+          );
+
       }).catch(err => {
+
+        next(0)
         console.log("no se conecto");
       });
-    })
-  }
+  })
+}
 
 
 
