@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
-const {selectDB, queryDB} = require("./db")
+const { selectDB, queryDB } = require("./db")
+
 
 //solo para pruebas
 router.get("/categorias/:id", async (req, res) => {
@@ -25,8 +26,8 @@ router.post("/cuentas/add", async (req, res) => {
   console.log(req.body)
 
   await queryDB(`INSERT INTO db_cuentas( nombre , numero , titular , banco , id_usuario) VALUES ( '', '' , '', '', ${id_usuario})`)
-  .then(response => res.json(response))
-  .catch(err => res.json(err))
+    .then(response => res.json(response))
+    .catch(err => res.json(err))
 })
 
 router.post("/categoria/add", async (req, res) => {
@@ -76,7 +77,7 @@ router.get("/usuarios", async (req, res) => {
 
 router.get("/usuarios/prueba", async (req, res) => {
   queryDB("UPDATE bd_usuario SET correo = 'pruebaupdate' where I_usuario = 1")
-  .then(x => res.send('ok'), err => res.send('error'))
+    .then(x => res.send('ok'), err => res.send('error'))
 
 })
 
