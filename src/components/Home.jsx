@@ -67,4 +67,5 @@ const getData = () =>
     .then(response => response.json());
 }
 
+
 export default Home;

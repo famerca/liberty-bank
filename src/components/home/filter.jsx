@@ -1,16 +1,20 @@
+
 import '../../styles/Home.scss';
 
-const HomeFiltro = () => {
+const HomeFiltro = ({updateFilds, filds}) => {
+
+
+
     return (
         <div className="home-filter">
             <label htmlFor="">Tipo</label>
-            <select>
+            <select value={filds.tipo} onChange={(e) => {updateFilds('tipo', e.target.value)}}>
                 <option value="todos">Todos</option>
                 <option value="ingreso">Ingreso</option>
                 <option value="egreso">Egreso</option>
             </select>
             <label htmlFor="">Categoria</label>
-            <select>
+            <select value={filds.categoria} onChange={(e) => {updateFilds('categoria', e.target.value)}}>
                 <option value="0">Todos</option>
                 <option value="1">Pago de luz</option>
                 <option value="2">Pago de agua</option>
@@ -20,11 +24,13 @@ const HomeFiltro = () => {
             <label htmlFor="">Fecha</label>
             <div>
                 <span>de</span>
-                <input type="date" name="" id="" />
+                <input value={filds.from} onChange={(e) => {updateFilds('from', e.target.value)}}
+                 type="date" name="" id="" />
             </div>
             <div>
                 <span>A</span>
-                <input type="date" name="" id="" />
+                <input value={filds.to} onChange={(e) => {updateFilds('to', e.target.value)}}
+                 type="date" name="" id="" />
             </div>
         </div>
     )
