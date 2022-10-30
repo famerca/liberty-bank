@@ -1,8 +1,9 @@
+
 import React, { useState, useEffect } from "react"// , useRef, forwardRef, useImperativeHandle } from 'react'
 import { VscError } from 'react-icons/vsc'
 import { AiFillPlusCircle } from 'react-icons/ai'
 
-let datosCategorias = [
+let datosCategorias1 = [
   { nombre: "nombre1", tipo: "ingreso", id: 1 },
   { nombre: "nombre2", tipo: "ingreso", id: 1 },
   { nombre: "nombre3", tipo: "ingreso", id: 1 },
@@ -20,7 +21,7 @@ let datosCategorias = [
 
 ]
 
-let datosCuentas = [
+let datosCuentas1 = [
   { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
   { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
   { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
@@ -48,6 +49,34 @@ let datosCuentas = [
 
 
 const Movimientos = () => {
+  const [datosCategorias, setDatosCategoria] = useState([])
+  const [datosCuentas, setDatosCuentas] = useState([])
+  useEffect(() => {
+    fetch("/categorias/1")
+      .then(response => response.json())
+      .then(datos => {
+        let data_ = [];
+        datos.map(x => {
+          const { id, nombre, tipo } = x
+          data_.push({ nombre, tipo, id })
+        })
+        setDatosCategoria([...data_])
+      })
+  }, [])
+
+  useEffect(() => {
+    fetch("/cuentas/1")
+      .then(response => response.json())
+      .then(datos => {
+        let data_ = [];
+        datos.map(x => {
+          const { id, nombre: nombreCuenta, numero, titular, banco } = x
+          data_.push({ nombreCuenta, numero, titular, banco, id })
+        })
+        setDatosCuentas([...data_])
+      })
+  }, [])
+
   const tablesStyle = { width: "100% !important", height: "100% !important", display: "grid", gridTemplateColumns: "1fr 2fr", gridGap: "10px", padding: "20px", backgroundColor: "rgba(155,155,155,0.3)" }
   return (
     <div style={tablesStyle}>
@@ -126,12 +155,36 @@ const Rows = (props) => {
   }, [props.data])
 
 
-
   useEffect(() => {
+    const addMovimiento = () => {
+      const update = {
+        id_usuario: 1
+      };
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(update),
+      };
+      fetch('/categoria/add', options)
+        .then(data => {
+          if (!data.ok) {
+            throw Error(data.status);
+          }
+          return data.json();
+        }).then(update => {
+          console.log(update);
+        }).catch(e => {
+          console.log(e);
+        });
+      setDatos([{ nombre: "", tipo: "", id: 0 }, ...datos])
+    }
     if (showNewRow) {
       // console.log(dtos);
       (tipo === "movimientos") ?
-        setDatos([{ nombre: "", tipo: "", id: 0 }, ...datos]) :
+        addMovimiento() :
         setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: 0 }, ...datos])
 
       setShowNewRow(false)
