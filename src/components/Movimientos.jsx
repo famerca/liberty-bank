@@ -156,7 +156,8 @@ const Rows = (props) => {
 
 
   useEffect(() => {
-    const addMovimiento = () => {
+
+    const addCategoria = () => {
       const update = {
         id_usuario: 1
       };
@@ -173,19 +174,49 @@ const Rows = (props) => {
           if (!data.ok) {
             throw Error(data.status);
           }
+
           return data.json();
         }).then(update => {
+
+          setDatos([{ nombre: "", tipo: "", id: update }, ...datos])
           console.log(update);
         }).catch(e => {
           console.log(e);
         });
-      setDatos([{ nombre: "", tipo: "", id: 0 }, ...datos])
     }
+
+    const addCuenta = () => {
+      const update = {
+        id_usuario: 1
+      };
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(update),
+      };
+      fetch('/cuentas/add', options)
+        .then(data => {
+          if (!data.ok) {
+            throw Error(data.status);
+          }
+
+          return data.json();
+        }).then(update => {
+          setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: update }, ...datos])
+          console.log(update);
+        }).catch(e => {
+          console.log(e);
+        });
+    }
+
     if (showNewRow) {
       // console.log(dtos);
       (tipo === "movimientos") ?
-        addMovimiento() :
-        setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: 0 }, ...datos])
+        addCategoria() :
+        addCuenta()
 
       setShowNewRow(false)
     }
@@ -199,8 +230,8 @@ const Rows = (props) => {
       (deleteRow.index === 0) ?
         setDatos([...datos.slice(1)]) :
         (deleteRow.index === datos.length - 1) ?
-          setDatos([...datos.slice(0, datos.length - 2)]) :
-          setDatos([...datos.slice(0, deleteRow.index - 1), ...datos.slice(deleteRow.index + 1)])
+          setDatos([...datos.slice(0, datos.length - 1)]) :
+          setDatos([...datos.slice(0, deleteRow.index), ...datos.slice(deleteRow.index + 1)])
 
       setDeleteRow({ index: -1 })
     }
@@ -252,10 +283,42 @@ const RowData = (props) => {// forwardRef((props, ref) => {
 
   }, [row, type_])
 
+
   const handleDelete = (e) => {
+    const deleteRow = (table) => {
+      const update = {
+        id: id
+      };
+
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(update),
+      };
+      fetch(`/${table}/delete`, options)
+        .then(data => {
+          if (!data.ok) {
+            throw Error(data.status);
+          }
+
+          return data.json();
+        }).then(update => {
+          console.log(update);
+        }).catch(e => {
+          console.log(e);
+        });
+    }
+
     //aqui realizo una solicitud post cuando se modifiquen los datos  
     e.preventDefault()
     props.setDeleteRow({ index: index })
+    if (type === "movimientos") {
+      deleteRow("categoria")
+    } else {
+      deleteRow("cuentas")
+    }
   }
 
   return (

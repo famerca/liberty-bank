@@ -2,6 +2,69 @@ const express = require('express')
 const router = express.Router();
 const { selectDB, queryDB } = require("./db")
 
+/*
+
+
+
+router.post("/cuentas/add", async (req, res) => {
+
+  const { id_usuario } = req.body
+  console.log(req.body)
+
+  await queryDB(`INSERT INTO db_cuentas( nombre , numero , titular , banco , id_usuario) VALUES ( '', '' , '', '', ${id_usuario})`).then(response => res.json(response))
+})
+
+router.post("/categoria/add", async (req, res) => {
+
+  const { id_usuario } = req.body
+  // console.log(req.body)
+
+  await queryDB(`INSERT INTO Categoria( nombre, tipo, id_usuario) VALUES ( '', '' , '${id_usuario}')`).then(response => {
+    let { insertId } = response
+    insertId = insertId.toString()
+    res.json(insertId)
+  })
+})
+
+
+router.post("/cuentas/update", async (req, res) => {
+
+  const { id, nombre, numero, titular, banco } = req.body
+  console.log(req.body)
+
+  await queryDB(`UPDATE db_cuentas SET  nombre = '${nombre}', numero = '${numero}' , titular = '${titular}' , banco = '${banco}' WHERE id= '${id}'  `).then(response => res.json(1))
+})
+
+router.post("/categoria/update", async (req, res) => {
+
+  const { id, nombre, tipo } = req.body
+  console.log(req.body)
+
+  await queryDB(`UPDATE Categoria SET nombre = '${nombre}', tipo = '${tipo}'  WHERE id = '${id}'`).then(response => res.json(1)).catch(error => res.json(0))
+})
+
+router.post("/cuentas/delete", async (req, res) => {
+
+  const { id } = req.body
+  console.log(req.body)
+
+  await queryDB(`DELETE FROM  db_cuentas   WHERE id= '${id}'  `).then(response => res.json(1)).catch(error => res.json(0))
+})
+
+router.post("/categoria/delete", async (req, res) => {
+
+  const { id } = req.body
+  console.log(req.body)
+
+  await queryDB(`DELETE FROM Categoria  WHERE id = '${id}'`).then(response => res.json(1)).catch(error => res.json(0))
+})
+
+router.get("/usuarios", async (req, res) => {
+  selectDB("bd_usuario").then(x => res.json(x));
+})
+
+
+*/
 
 //solo para pruebas
 router.get("/categorias/:id", async (req, res) => {
@@ -26,7 +89,7 @@ router.post("/cuentas/add", async (req, res) => {
   console.log(req.body)
 
   await queryDB(`INSERT INTO db_cuentas( nombre , numero , titular , banco , id_usuario) VALUES ( '', '' , '', '', ${id_usuario})`)
-    .then(response => res.json(response))
+    .then(response => res.json(response.insertId.toString()))
     .catch(err => res.json(err))
 })
 
@@ -35,7 +98,9 @@ router.post("/categoria/add", async (req, res) => {
   const { id_usuario } = req.body
   console.log(req.body)
 
-  await queryDB(`INSERT INTO Categoria( nombre, tipo, id_usuario) VALUES ( '', '' , '${id_usuario}')`).then(response => res.json(response))
+  await queryDB(`INSERT INTO Categoria( nombre, tipo, id_usuario) VALUES ( '', '' , '${id_usuario}')`)
+    .then(response => res.json(response.insertId.toString()))
+    .catch(err => res.json(err))
 })
 
 
@@ -68,7 +133,7 @@ router.post("/categoria/delete", async (req, res) => {
   const { id } = req.body
   console.log(req.body)
 
-  await queryDB(`DELETE FROM Categoria  WHERE id = '${id}'`).then(response => res.json(response))
+  await queryDB(`DELETE FROM Categoria  WHERE id= '${id}' `).then(response => res.json(response))
 })
 
 router.get("/usuarios", async (req, res) => {
