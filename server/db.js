@@ -34,7 +34,7 @@ const query = (query) => {
         conn.query(query)
           .then((res) => {
             console.log(res);
-            next(1);
+            next(res);
           }).catch(err => {
             console.log('Error:', err)
             next(0)
@@ -48,8 +48,6 @@ const query = (query) => {
       });
   })
 }
-
-
 
 
 module.exports.selectDB = select;

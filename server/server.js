@@ -8,6 +8,7 @@ const path = require('path')
 app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.resolve(__dirname, '..', 'build')));
+app.use(express.json())
 
 
 //config
