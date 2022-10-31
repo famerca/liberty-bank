@@ -71,7 +71,7 @@ router.post("/categoria/delete", async (req, res) => {
   await queryDB(`DELETE FROM Categoria  WHERE id = '${id}'`).then(response => res.json(response))
 })
 
-router.get("/movimientos", async (req, res) => {
+router.get("/transacciones", async (req, res) => {
   const token = req.query.token || 0;
 
   if(token !== 0)

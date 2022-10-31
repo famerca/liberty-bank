@@ -68,7 +68,7 @@ const getData = (user) =>
     const token = user.token ?? "";
     return  new Promise(next => {
 
-        fetch(`${domain}/movimientos?token=${token}`)
+        fetch(`${domain}/transacciones?token=${token}`)
         .then(response => {
             if(response.status === 200)
             {
