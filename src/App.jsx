@@ -47,7 +47,7 @@ function App() {
               } />
               <Route path='/movimientos' element={
                 <PvRoute user={user}>
-                  <Movimientos />
+                  <Movimientos token={2} />
                 </PvRoute>
               } />
 

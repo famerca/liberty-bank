@@ -5,19 +5,19 @@ import { AiFillPlusCircle } from 'react-icons/ai'
 
 let datosCategorias1 = [
   { nombre: "nombre1", tipo: "ingreso", id: 1 },
-  { nombre: "nombre2", tipo: "ingreso", id: 1 },
-  { nombre: "nombre3", tipo: "ingreso", id: 1 },
-  { nombre: "nombre4", tipo: "ingreso", id: 1 },
-  { nombre: "nombre5", tipo: "ingreso", id: 1 },
-  { nombre: "nombre6", tipo: "ingreso", id: 1 },
-  { nombre: "nombre7", tipo: "ingreso", id: 1 },
-  { nombre: "nombre8", tipo: "ingreso", id: 1 },
-  { nombre: "nombre9", tipo: "ingreso", id: 1 },
-  { nombre: "nombre10", tipo: "ingreso", id: 1 },
-  { nombre: "nombre11", tipo: "ingreso", id: 1 },
-  { nombre: "nombre12", tipo: "ingreso", id: 1 },
-  { nombre: "nombre13", tipo: "ingreso", id: 1 },
-  { nombre: "nombre14", tipo: "ingreso", id: 1 },
+  { nombre: "nombre2", tipo: "ingreso", id: 2 },
+  { nombre: "nombre3", tipo: "ingreso", id: 3 },
+  // { nombre: "nombre4", tipo: "ingreso", id: 4 },
+  // { nombre: "nombre5", tipo: "ingreso", id: 5 },
+  // { nombre: "nombre6", tipo: "ingreso", id: 6 },
+  // { nombre: "nombre7", tipo: "ingreso", id: 7 },
+  // { nombre: "nombre8", tipo: "ingreso", id: 8 },
+  // { nombre: "nombre9", tipo: "ingreso", id: 9 },
+  // { nombre: "nombre10", tipo: "ingreso", id: 10 },
+  // { nombre: "nombre11", tipo: "ingreso", id: 11 },
+  // { nombre: "nombre12", tipo: "ingreso", id: 12 },
+  // { nombre: "nombre13", tipo: "ingreso", id: 13 },
+  // { nombre: "nombre14", tipo: "ingreso", id: 14 },
 
 ]
 
@@ -25,34 +25,34 @@ let datosCuentas1 = [
   { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
   { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
   { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
-  { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
+  // { nombreCuenta: "nombre de cuenta", numero: "0108-0113-0710823", titular: "bobby", banco: "jp morgan", id: 2 },
 ]
 
 
-const Movimientos = () => {
+const Movimientos = ({ token }) => {
   const [datosCategorias, setDatosCategoria] = useState([])
   const [datosCuentas, setDatosCuentas] = useState([])
   useEffect(() => {
-    fetch("/categorias/1")
+    fetch(`/categorias/${token}`)
       .then(response => response.json())
       .then(datos => {
         let data_ = [];
@@ -65,7 +65,7 @@ const Movimientos = () => {
   }, [])
 
   useEffect(() => {
-    fetch("/cuentas/1")
+    fetch(`/cuentas/${token}`)
       .then(response => response.json())
       .then(datos => {
         let data_ = [];
@@ -77,11 +77,11 @@ const Movimientos = () => {
       })
   }, [])
 
-  const tablesStyle = { width: "100% !important", height: "100% !important", display: "grid", gridTemplateColumns: "1fr 2fr", gridGap: "10px", padding: "20px", backgroundColor: "rgba(155,155,155,0.3)" }
+  const tablesStyle = { display: "grid", gridTemplateColumns: "1fr 2fr", gridGap: "10px", padding: "20px", backgroundColor: "rgba(155,155,155,0.3)", height: "100%", width: "100%" }
   return (
     <div style={tablesStyle}>
-      <Table type="movimientos" datos={datosCategorias} />
-      <Table type="cuentas" datos={datosCuentas} />
+      <Table token={token} type="movimientos" datos={datosCategorias} />
+      <Table token={token} type="cuentas" datos={datosCuentas} />
     </div >
   )
 }
@@ -134,7 +134,7 @@ const Table = (props) => {
       <table style={tableStyle}>
         {head}
         {datos.length === 0 ? <label> loading ....</label> :
-          <Rows setShowNewRow={setNewRow} showNewRow={newRow} data={datos} tipo={tipo} />
+          <Rows token={props.token} setShowNewRow={setNewRow} showNewRow={newRow} data={datos} tipo={tipo} />
         }
       </table>
     </div >
@@ -145,6 +145,7 @@ const Table = (props) => {
 
 const Rows = (props) => {
 
+  const { token } = props
   const { setShowNewRow, showNewRow } = props
 
   const [deleteRow, setDeleteRow] = useState({ index: -1 })
@@ -159,7 +160,7 @@ const Rows = (props) => {
 
     const addCategoria = () => {
       const update = {
-        id_usuario: 1
+        id_usuario: token
       };
 
       const options = {
@@ -187,7 +188,7 @@ const Rows = (props) => {
 
     const addCuenta = () => {
       const update = {
-        id_usuario: 1
+        id_usuario: token
       };
 
       const options = {
@@ -225,7 +226,6 @@ const Rows = (props) => {
 
   useEffect(() => {
     if (deleteRow.index !== -1) {
-      console.log("borrar ", deleteRow.index);
       //borrar
       (deleteRow.index === 0) ?
         setDatos([...datos.slice(1)]) :
@@ -238,7 +238,6 @@ const Rows = (props) => {
 
   }, [deleteRow, datos])
 
-  console.log(datos)
   return (
     <>
       {datos.map((row, index) => {
@@ -260,7 +259,7 @@ const RowData = (props) => {// forwardRef((props, ref) => {
   const [nombre, setNombre] = useState("")
   const [tipo, setTipo] = useState("")
   const [id, setId] = useState("")
-  const [numero, setNumero] = useState(0)
+  const [numero, setNumero] = useState("")
   const [titular, setTitular] = useState("")
   const [banco, setBanco] = useState("")
 
@@ -321,21 +320,74 @@ const RowData = (props) => {// forwardRef((props, ref) => {
     }
   }
 
+  const updateRow = (table) => {
+
+    const updateCategoria = {
+      id: id,
+      nombre: nombre,
+      tipo: tipo
+    };
+    const updateCuentas = {
+      id: id,
+      nombre: nombre,
+      numero: numero,
+      titular: titular,
+      banco: banco
+    }
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify((type === "movimientos") ? updateCategoria : updateCuentas),
+    };
+    fetch(`/${table}/update`, options)
+      .then(data => {
+        if (!data.ok) {
+          throw Error(data.status);
+        }
+
+        return data.json();
+      }).then(update => {
+        console.log(update);
+      }).catch(e => {
+        console.log(e);
+      });
+  }
+
+  function delay(callback, ms) {
+    var timer = 0;
+    return function() {
+      // console.log("antes: ", timer)
+      var context = this, arg = arguments;
+      clearTimeout(timer)
+      timer = setTimeout(function() {
+
+        callback.apply(context, arg)
+
+      }, ms || 0)
+      // console.log("despues: ", timer)
+    }
+  }
+
+
+
   return (
     <>
       {type === "movimientos" ?
         <tr style={trStyle}>
-          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} type="text" value={nombre} /> </td>
-          <td style={{ gridColumn: "6/9", textAlign: "start" }}><input style={inputStyle} onChange={(e) => setTipo(e.target.value)} type="text" defaultValue={tipo} /></td>
+          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} onKeyUp={delay(e => { updateRow("categoria") }, 2000)} type="text" value={nombre} /> </td>
+          <td style={{ gridColumn: "6/9", textAlign: "start" }}><input style={inputStyle} onChange={(e) => setTipo(e.target.value)} onKeyUp={delay(e => { updateRow("categoria") }, 2000)} type="text" defaultValue={tipo} /></td>
           <td style={{ gridColumn: "9", fontSize: "calc(60%)", textAlign: "start" }}>{id}</td>
           <td style={{ gridColumn: "10", textAlign: "start" }} >  <button style={buttonStyle} onClick={handleDelete}  ><VscError size={20} /> </button> </td>
         </tr>
         :
         <tr style={trStyle}>
-          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} type="text" defaultValue={nombre} /></td>
-          <td style={{ gridColumn: "6/10", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNumero(e.target.value)} type="text" defaultValue={numero} /></td>
-          <td style={{ gridColumn: "10/14", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setTitular(e.target.value)} type="text" defaultValue={titular} /></td>
-          <td style={{ gridColumn: "14/17", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setBanco(e.target.value)} type="text" defaultValue={banco} /></td>
+          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} onKeyUp={delay(e => { updateRow("cuentas") }, 2000)} type="text" defaultValue={nombre} /></td>
+          <td style={{ gridColumn: "6/10", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNumero(e.target.value)} onKeyUp={delay(e => { updateRow("cuentas") }, 2000)} type="text" defaultValue={numero} /></td>
+          <td style={{ gridColumn: "10/14", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setTitular(e.target.value)} onKeyUp={delay(e => { updateRow("cuentas") }, 2000)} type="text" defaultValue={titular} /></td>
+          <td style={{ gridColumn: "14/17", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setBanco(e.target.value)} onKeyUp={delay(e => { updateRow("cuentas") }, 2000)} type="text" defaultValue={banco} /></td>
           <td style={{ gridColumn: "17", fontSize: "calc(60%)", textAlign: "start" }}  >{id}</td>
           <td style={{ gridColumn: "18", textAlign: "start" }} ><button style={buttonStyle} onClick={handleDelete} > <VscError size={20} /></button></td>
         </tr>
