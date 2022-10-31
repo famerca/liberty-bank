@@ -5,7 +5,7 @@ import HomeSaldos from './home/saldos'
 import HomeCuentas from './home/cuentas'
 import HomeTransacciones from './home/transacciones'
 
-
+const domain = "http://localhost:5020";
 
 const Home = () => {
     const [list, setList] = useState([]);
@@ -19,6 +19,7 @@ const Home = () => {
 
     useEffect(() => {
         getData().then(r => {
+            r  ??= [];
             setList(r);
         });
     },[]);
@@ -63,8 +64,20 @@ const calcularCuentaTotal = (list) =>
 }
 const getData = () => 
 {
-    return fetch('/cuentas.json')
-    .then(response => response.json());
+    return fetch(`${domain}/movimientos`)
+    .then(response => {
+        console.log(response);
+        if(response.status == 200)
+            response.json()
+        else if(response.status == 400)
+        {
+            response.text().then(r =>  {
+                alert(r);
+            });
+        }
+    }).catch(err => {
+        console.log(err)
+    });
 }
 
 

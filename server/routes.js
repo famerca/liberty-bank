@@ -81,7 +81,7 @@ router.get("/movimientos", async (req, res) => {
     });
   }else
   {
-    res.status(400).json({error: "argumentos invalidos"});
+    res.status(400).send("argumentos invalidos");
   }
 })
 
