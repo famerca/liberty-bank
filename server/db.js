@@ -7,6 +7,8 @@ const conn = mysql.createConnection({
   port: "3306"
 })
 
+// Ingreso es 1
+// Egreso es 0 
 
 
 const select = (tabla, where = "1") =>
@@ -30,7 +32,6 @@ const select = (tabla, where = "1") =>
 const query = (query) =>
   {
     return new Promise( (next, reject) =>{
-
 
         conn.query(query, (err, res, filds) => 
         {
