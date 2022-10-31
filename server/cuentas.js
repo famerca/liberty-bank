@@ -4,6 +4,13 @@ const mapearCuentas = (cuentas) =>{
         const idcuentas = cuentas.map(cuenta => cuenta.id);
         cuentas = cuentas.map( cuenta => {
             cuenta.transacciones = [];
+            cuenta.saldos = {
+                total: cuenta.saldo,
+                egresos:0.0,
+                ingresos:0.0
+            }
+            delete cuenta.saldo;
+            delete cuenta.id;
             return cuenta;
         });
         obtenerMovimientoByCuenta(idcuentas).then(trccs => {
@@ -12,6 +19,11 @@ const mapearCuentas = (cuentas) =>{
                 const index = trc.cuenta;
                 trc.cuenta = cuentas[index].nombre;
                 cuentas[index].transacciones.push(trc);
+                if(trc.tipo === "ingreso")
+                    cuentas[index].saldos.ingresos += trc.monto;
+                else if(trc.tipo === "egreso")
+                    cuentas[index].saldos.egresos += trc.monto;
+                
             });
             next(cuentas);
         });
@@ -33,7 +45,7 @@ const obtenerMovimientoByCuenta = (id_cuentas) =>
         }
 
         queryDB(`SELECT m.concepto, m.ID_categoria as cat_n, m.referencia,
-         m.fecha, m.monto, m.tipo, m.ID_cuenta as cuenta, c.nombre as categoria 
+        DATE_FORMAT(m.fecha, "%Y-%m-%d") as fecha, m.monto, m.tipo, m.ID_cuenta as cuenta, c.nombre as categoria 
          FROM bd_movimiento as m, Categoria as c 
          WHERE c.id = m.ID_categoria AND (${ids}) ORDER BY m.fecha DESC`)
          .then(r => {
