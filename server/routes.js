@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
-const { selectDB, queryDB } = require("./db")
-
+const {selectDB, queryDB} = require("./db")
+const {mapearCuentas} = require('./cuentas')
 
 //solo para pruebas
 router.get("/categorias/:id", async (req, res) => {
@@ -67,14 +67,18 @@ router.post("/categoria/delete", async (req, res) => {
   await queryDB(`DELETE FROM Categoria  WHERE id= '${id}' `).then(response => res.json(response))
 })
 
-router.get("/usuarios", async (req, res) => {
-  selectDB("bd_usuario").then(x => res.json(x));
-})
+router.get("/transacciones", async (req, res) => {
+  const token = req.query.token || 0;
 
-router.get("/usuarios/prueba", async (req, res) => {
-  queryDB("UPDATE bd_usuario SET correo = 'pruebaupdate' where I_usuario = 1")
-    .then(x => res.send('ok'), err => res.send('error'))
-
+  if(token !== 0)
+  {
+    selectDB('db_cuentas', `id_usuario = '${token}'`).then(x => {
+      mapearCuentas(x).then( r =>  res.json(r));
+    });
+  }else
+  {
+    res.status(400).send("argumentos invalidos");
+  }
 })
 
 

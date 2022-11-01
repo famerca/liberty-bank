@@ -5,9 +5,9 @@ import HomeSaldos from './home/saldos'
 import HomeCuentas from './home/cuentas'
 import HomeTransacciones from './home/transacciones'
 
+const domain = "http://localhost:5020";
 
-
-const Home = () => {
+const Home = ({user}) => {
     const [list, setList] = useState([]);
     const [active, setActive] = useState({saldos:{}, transacciones: []});
 
@@ -18,9 +18,11 @@ const Home = () => {
     const selectTotal = () => {setActive(calcularCuentaTotal(list))};
 
     useEffect(() => {
-        getData().then(r => {
-            setList(r);
-        });
+        if(user)
+            getData(user).then(r => {
+                console.log(r);
+                setList(r);
+            });
     },[]);
 
     useEffect((() => {setActive(calcularCuentaTotal(list))}), [list])
@@ -61,10 +63,33 @@ const calcularCuentaTotal = (list) =>
     return cuenta;
 
 }
-const getData = () => 
+const getData = (user) => 
 {
-    return fetch('/cuentas.json')
-    .then(response => response.json());
+    const token = user.token ?? "";
+    return  new Promise(next => {
+
+        fetch(`${domain}/transacciones?token=${token}`)
+        .then(response => {
+            if(response.status === 200)
+            {
+                response.json().then( r => next(r));
+            }
+            else if(response.status === 400)
+            {
+                console.log(response);
+                response.text().then(r =>  {
+                    alert(r);
+                    next([])
+                });
+            }
+        }).catch(err => {
+            console.log(err)
+            next([]);
+        });
+
+    })
+    
 }
+
 
 export default Home;

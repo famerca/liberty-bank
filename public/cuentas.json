@@ -39,36 +39,40 @@
         "transacciones": [
             {
                 "concepto" : "Concepto",
-                "categoria" : "Alquiler",
+                "categoria" : "Pago de luz",
+                "cat_n" : 1,
                 "referencia" : "15641466",
-                "fecha" : "2014-41-14",
+                "fecha" : "2014-01-14",
                 "cuenta" : "Cuenta de cobros",
                 "monto" : 451,
                 "tipo" : "ingreso"
             },
             {
                 "concepto" : "Concepto",
-                "categoria" : "Alquiler",
+                "categoria" : "Pago de luz",
+                "cat_n" : 1,
                 "referencia" : "15641466",
-                "fecha" : "2014-41-14",
+                "fecha" : "2014-04-14",
                 "cuenta" : "Cuenta de cobros",
                 "monto" : 451,
                 "tipo" : "ingreso"
             },
             {
                 "concepto" : "Concepto",
-                "categoria" : "Alquiler",
+                "categoria" : "Pago de luz",
+                "cat_n" : 1,
                 "referencia" : "15641466",
-                "fecha" : "2014-41-14",
+                "fecha" : "2014-01-14",
                 "cuenta" : "Cuenta de cobros",
                 "monto" : 400,
                 "tipo" : "egreso"
             },
             {
                 "concepto" : "Concepto",
-                "categoria" : "Alquiler",
+                "categoria" : "Pago de luz",
+                "cat_n" : 1,
                 "referencia" : "15641466",
-                "fecha" : "2014-41-14",
+                "fecha" : "2014-10-14",
                 "cuenta" : "Cuenta de cobros",
                 "monto" : 451,
                 "tipo" : "ingreso"
@@ -88,36 +92,40 @@
         "transacciones": [
             {
                 "concepto" : "Concepto",
-                "categoria" : "Alquiler",
+                "categoria" : "Nomina",
+                "cat_n" : 4,
                 "referencia" : "15641466",
-                "fecha" : "2014-41-14",
+                "fecha" : "2014-01-14",
                 "cuenta" : "Cuenta de negocios",
                 "monto" : 41,
                 "tipo" : "egreso"
             },
             {
                 "concepto" : "Concepto",
-                "categoria" : "Alquiler",
+                "categoria" : "Nomina",
+                "cat_n" : 4,
                 "referencia" : "15641466",
-                "fecha" : "2014-41-14",
+                "fecha" : "2014-10-15",
                 "cuenta" : "Cuenta de negocios",
                 "monto" : 451,
                 "tipo" : "ingreso"
             },
             {
                 "concepto" : "pago a luis",
-                "categoria" : "Alquiler",
+                "categoria" : "Renta",
+                "cat_n" : 3,
                 "referencia" : "15641466",
-                "fecha" : "2014-41-14",
+                "fecha" : "2014-01-16",
                 "cuenta" : "Cuenta de negocios",
                 "monto" : 401,
                 "tipo" : "egreso"
             },
             {
                 "concepto" : "Concepto",
-                "categoria" : "Alquiler",
+                "categoria" : "Pago de luz",
+                "cat_n" : 1,
                 "referencia" : "15641466",
-                "fecha" : "2014-41-14",
+                "fecha" : "2014-01-17",
                 "cuenta" : "Cuenta de negocios",
                 "monto" : 451,
                 "tipo" : "ingreso"
@@ -137,36 +145,40 @@
         "transacciones": [
             {
                 "concepto" : "Concepto",
-                "categoria" : "Alquiler",
+                "categoria" : "Pago de agua",
+                "cat_n" : 2,
                 "referencia" : "15641466",
-                "fecha" : "2014-41-14",
+                "fecha" : "2014-10-14",
                 "cuenta" : "Cuenta de administracion",
                 "monto" : 451,
                 "tipo" : "ingreso"
             },
             {
                 "concepto" : "Concepto",
-                "categoria" : "Alquiler",
-                "referencia" : "15641466",
-                "fecha" : "2014-41-14",
+                "categoria" : "Pago de luz",
+                "cat_n" : 1,
+                "referencia" : "15610466",
+                "fecha" : "2014-10-16",
                 "cuenta" : "Cuenta de administracion",
                 "monto" : 451,
                 "tipo" : "ingreso"
             },
             {
                 "concepto" : "pago a jenofer",
-                "categoria" : "Alquiler",
-                "referencia" : "15641466",
-                "fecha" : "2014-41-14",
+                "categoria" : "Pago de luz",
+                "cat_n" : 1,
+                "referencia" : "15610466",
+                "fecha" : "2014-10-17",
                 "cuenta" : "Cuenta de administracion",
                 "monto" : 401,
                 "tipo" : "egreso"
             },
             {
                 "concepto" : "Mantenimiento",
-                "categoria" : "Instalcion",
-                "referencia" : "15641466",
-                "fecha" : "2014-41-14",
+                "categoria" : "Pago de agua",
+                "cat_n" : 2,
+                "referencia" : "15610466",
+                "fecha" : "2014-10-14",
                 "cuenta" : "Cuenta de administracion",
                 "monto" : 451,
                 "tipo" : "ingreso"
