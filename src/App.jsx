@@ -50,6 +50,11 @@ function App() {
                 <PvRoute user={user}>
                   <Movimientos token={2} />
                 </PvRoute>
+
+              <Route path='/aggmovimientos' element={
+                <PvRoute user={user}>
+                  <AddMovForm/>
+                </PvRoute>
               } />
 
             </Routes>
