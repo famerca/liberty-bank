@@ -1,0 +1,52 @@
+@import "vars";
+
+
+.main-container-movform {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--very-light-gray);
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-container-movform {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    width: 50%;
+    font-size: var(--sm);
+}
+
+.input-movform {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+
+.input-movform input {
+   padding: 0.8rem;
+   background-color: var(--very-light-gray);
+   border: 0px;
+}
+
+.input-movform select{
+    padding: 0.8rem;
+    background-color: var(--very-light-gray);
+    border: 0px;
+ }
+
+ .button-movform {
+    background-color: #13d3b1;
+    border-radius: 8px;
+    border: none;
+    color: var(--white);
+    width: 100%;
+    cursor: pointer;
+    font-size: var(--md);
+    font-weight: bold;
+    height: 50px;
+  }
