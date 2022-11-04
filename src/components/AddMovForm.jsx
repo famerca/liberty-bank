@@ -1,14 +1,44 @@
 import { useForm } from "react-hook-form";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Movform.scss";
 //import { DatePicker } from "@material-ui/pickers";
 
-export default function AddMovForm() {
+export default function AddMovForm(props) {
+  const { token } = props.user
+  const [datosCuentas, setDatosCuentas] = useState([])
+  const [datosCategoria, setDatosCategoria] = useState([])
   const { register, handleSubmit } = useForm();
-  const onSubmit = data => console.log(data);
-  const [fechaini, fechaselec] = useState(new Date());
+  // const [fechaini, fechaselec] = useState(new Date());
 
-  console.log(fechaselec)
+
+  const onSubmit = data => console.log(data);
+
+  useEffect(() => {
+    fetch(`/categorias/${token}`)
+      .then(response => (response.ok) ? response.json() : [])
+      .then(datos => {
+        let data_ = [];
+        datos.forEach(x => {
+          const { id, nombre, tipo } = x
+          data_.push({ nombre, tipo, id })
+        })
+        setDatosCategoria([...data_])
+      })
+  }, [])
+
+  useEffect(() => {
+    fetch(`/cuentas/${token}`)
+      .then(response => (response.ok) ? response.json() : [])
+      .then(datos => {
+        let data_ = [];
+        datos.forEach(x => {
+          const { id, nombre: nombreCuenta, numero, titular, banco } = x
+          data_.push({ nombreCuenta, numero, titular, banco, id })
+        })
+        setDatosCuentas([...data_])
+      })
+  }, [])
+  // console.log(fechaselec);
 
   return (
     <div className="main-container-movform">
@@ -31,11 +61,15 @@ export default function AddMovForm() {
         <div className="input-movform">
           <label>Categoria</label>
           <select {...register("Categoria")}>
-            <option value="PagoLuz">Pago de Luz</option>
-            <option value="PagoAgua">Pago de Agua</option>
-            <option value="Renta">Renta</option>
-            <option value="NominaEmpleados">Nomina de empleados</option>
-            <option value="Otro">Otro</option>
+            {datosCategoria.map((value, index) => {
+              const { nombre, tipo } = value
+              return (<option key={index} value={`${nombre} (${tipo})`}>{`${nombre} (${tipo})`}</option>)
+            })}
+            {/* <option value="PagoLuz">Pago de Luz</option> */}
+            {/* <option value="PagoAgua">Pago de Agua</option> */}
+            {/* <option value="Renta">Renta</option> */}
+            {/* <option value="NominaEmpleados">Nomina de empleados</option> */}
+            {/* <option value="Otro">Otro</option> */}
           </select>
         </div>
 
@@ -43,10 +77,15 @@ export default function AddMovForm() {
         <div className="input-movform">
           <label>Cuenta</label>
           <select {...register("Cuenta")} >
-            <option value="CuentaPagos">Cuenta de Pagos</option>
-            <option value="CuentaCobros">Cuenta de Cobros</option>
-            <option value="CuentaDividendos">Cuenta de dividendos</option>
-            <option value="CuentaPrincipal">Cuenta Principal</option>
+            {datosCuentas.map((value, index) => {
+              const { nombreCuenta } = value
+              return (<option key={index} value={`${nombreCuenta}`}>{`${nombreCuenta}`}</option>)
+            })}
+
+            {/* <option value="CuentaPagos">Cuenta de Pagos</option> */}
+            {/* <option value="CuentaCobros">Cuenta de Cobros</option> */}
+            {/* <option value="CuentaDividendos">Cuenta de dividendos</option> */}
+            {/* <option value="CuentaPrincipal">Cuenta Principal</option> */}
           </select>
         </div>
 

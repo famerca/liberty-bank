@@ -48,7 +48,8 @@ let datosCuentas1 = [
 ]
 
 
-const Movimientos = ({ token }) => {
+const Movimientos = (props) => {
+  const { token } = props.user
   const [datosCategorias, setDatosCategoria] = useState([])
   const [datosCuentas, setDatosCuentas] = useState([])
   useEffect(() => {
@@ -62,7 +63,7 @@ const Movimientos = ({ token }) => {
         })
         setDatosCategoria([...data_])
       })
-  }, [])
+  }, [token])
 
   useEffect(() => {
     fetch(`/cuentas/${token}`)
@@ -75,7 +76,7 @@ const Movimientos = ({ token }) => {
         })
         setDatosCuentas([...data_])
       })
-  }, [])
+  }, [token])
 
   const tablesStyle = { display: "grid", gridTemplateColumns: "1fr 2fr", gridGap: "10px", padding: "20px", backgroundColor: "rgba(155,155,155,0.3)", height: "100%", width: "100%" }
   return (

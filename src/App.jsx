@@ -49,13 +49,13 @@ function App() {
               } />
               <Route path='/movimientos' element={
                 <PvRoute user={user}>
-                  <Movimientos token={2} />
+                  <Movimientos user={user} />
                 </PvRoute>
               } />
 
               <Route path='/aggmovimientos' element={
                 <PvRoute user={user}>
-                  <AddMovForm />
+                  <AddMovForm user={user} />
                 </PvRoute>
               } />
             </Routes>
