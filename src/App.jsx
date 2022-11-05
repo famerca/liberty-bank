@@ -12,7 +12,7 @@ import Movimientos from './components/Movimientos';
 
 function App() {
 
-  const [user, setUser] = useState({ token: 1});
+  const [user, setUser] = useState(null);
 
   const login = () => {
     if (user)
@@ -37,10 +37,10 @@ function App() {
           <main>
             <Routes>
               <Route index element={
-                user ? <Home user={user} /> : <Login />
+                user ? <Home user={user} /> : <Login setUser={setUser} />
               } />
-              <Route path='/login' element={0 ? <Navigate to='/home' /> : <Login />} />
-              <Route path='/register' element={0 ? <Navigate to='/home' /> : <Register />} />
+              <Route path='/login' element={user ? <Navigate to='/home' /> : <Login setUser={setUser} />} />
+              <Route path='/register' element={user ? <Navigate to='/home' /> : <Register />} />
               <Route path='/home' element={
                 <PvRoute user={user}>
                   <Home user={user} />

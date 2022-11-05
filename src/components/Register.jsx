@@ -6,7 +6,7 @@ import locki from "../icons/Lock.svg";
 import logo from "../icons/LB.png";
 import img from "../icons/img.png";
 import Axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 /*username, clave, nombre, correo*/
 
 const Register = () => {
@@ -17,14 +17,16 @@ const Register = () => {
 
   const submitUser = (event) => {
     event.preventDefault();
-    Axios.post("http://localhost:3001/register", {
+    Axios.post("/register", {
       username: username,
       clave: clave,
       nombre: nombre,
       correo: correo,
     });
+    link("/home")
   };
 
+  const link = useNavigate();
   return (
     <div className="main">
       <section className="flex-container">

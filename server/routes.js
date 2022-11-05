@@ -1,7 +1,9 @@
 const express = require('express')
 const router = express.Router();
-const {selectDB, queryDB} = require("./db")
-const {mapearCuentas} = require('./cuentas')
+const { selectDB, queryDB, db } = require("./db")
+const { mapearCuentas } = require('./cuentas')
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 //solo para pruebas
 router.get("/categorias/:id", async (req, res) => {
@@ -70,16 +72,72 @@ router.post("/categoria/delete", async (req, res) => {
 router.get("/transacciones", async (req, res) => {
   const token = req.query.token || 0;
 
-  if(token !== 0)
-  {
+  if (token !== 0) {
     selectDB('db_cuentas', `id_usuario = '${token}'`).then(x => {
-      mapearCuentas(x).then( r =>  res.json(r));
+      mapearCuentas(x).then(r => res.json(r));
     });
-  }else
-  {
+  } else {
     res.status(400).send("argumentos invalidos");
   }
 })
 
+router.post("/register", (req, res) => {
+  const username = req.body.username;
+  const clave = req.body.clave;
+  const nombre = req.body.nombre;
+  const correo = req.body.correo;
+
+  bcrypt.hash(clave, saltRounds, (err, hash) => {
+    if (err) {
+      console.log(err);
+    }
+
+    db.query(
+      "INSERT INTO  bd_usuario (username, clave, nombre, correo) VALUES (?,?,?,?)",
+      [username, hash, nombre, correo],
+      (err, result) => {
+        console.log(err);
+      }
+    );
+  });
+});
+
+router.get("/login", (req, res) => {
+  if (req.session.user) {
+    res.send({ loggedIn: true, user: req.session.user });
+  } else {
+    res.send({ loggedIn: false });
+  }
+});
+
+router.post("/login", (req, res) => {
+  const username = req.body.username;
+  const clave = req.body.clave;
+  console.log(req.body);
+  db.query(
+    "SELECT * FROM bd_usuario WHERE username = ?;",
+    username,
+    (err, result) => {
+      if (err) {
+        res.send({ err: err });
+      }
+
+      if (result.length > 0) {
+        bcrypt.compare(clave, result[0].clave, (error, response) => {
+          console.log(response, clave);
+          if (response) {
+            req.session.user = result[0];
+            console.log(req.session.user);
+            res.send(result);
+          } else {
+            res.send({ message: "Wrong username/password combination!" });
+          }
+        });
+      } else {
+        res.send({ message: "User doesn't exist" });
+      }
+    }
+  );
+});
 
 module.exports = router;

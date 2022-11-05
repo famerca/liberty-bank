@@ -35,11 +35,11 @@ app.use(
 );
 
 const db = mysql.createPool({
-  host: "sql5.freesqldatabase.com",
-  user: "sql5530096",
-  password: "jbXQIreGYh",
-  database: "sql5530096",
-  port: "3306",
+  host: "bo0qmwdxk7frdjqezkuw-mysql.services.clever-cloud.com",
+  user: "u1pnbraibg0snk3j",
+  password: "mhRkNx8XNdh2ntTIsCKk",
+  database: "bo0qmwdxk7frdjqezkuw",
+  port: "3306"
 });
 
 app.post("/register", (req, res) => {

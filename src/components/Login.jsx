@@ -8,15 +8,16 @@ import img from "../icons/img.png";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 
-const Login = () => {
+const Login = ({ setUser }) => {
   const [username, setUsername] = useState("");
   const [clave, setClave] = useState("");
 
   const [loginStatus, setLoginStatus] = useState("");
 
   const login = (event) => {
+    setUser({ token: 1 })
     event.preventDefault();
-    Axios.post("http://localhost:3001/login", {
+    Axios.post("/login", {
       username: username,
       clave: clave,
     }).then((response) => {
