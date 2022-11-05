@@ -25,7 +25,10 @@ const Login = ({ setUser }) => {
       if (response.status === 200) {
         localStorage.setItem('session', JSON.stringify(response.data));
         setUser(response.data);
-      } 
+      }else
+      {
+        console.log(response.data.message);
+      }
     });
   };
 

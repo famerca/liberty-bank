@@ -22,8 +22,10 @@ const Register = () => {
       clave: clave,
       nombre: nombre,
       correo: correo,
-    });
-    link("/home")
+    }).then(r => {
+      if(r.status === 200)
+        link("/home")
+    }) 
   };
 
   const link = useNavigate();
