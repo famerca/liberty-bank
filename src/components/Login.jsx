@@ -1,13 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Login.scss";
 import useri from "../icons/User.svg";
 import emaili from "../icons/Mail.svg";
 import locki from "../icons/Lock.svg";
 import logo from "../icons/LB.png";
 import img from "../icons/img.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Axios from "axios";
 
 const Login = () => {
+  const [username, setUsername] = useState("");
+  const [clave, setClave] = useState("");
+
+  const [loginStatus, setLoginStatus] = useState("");
+
+  const login = (event) => {
+    event.preventDefault();
+    Axios.post("http://localhost:3001/login", {
+      username: username,
+      clave: clave,
+    }).then((response) => {
+      if (response.data.message) {
+        setLoginStatus(response.data.message);
+        clicks("/home");
+      } else {
+        setLoginStatus(response.data[0].username);
+      }
+    });
+  };
+
+  const clicks = useNavigate();
   return (
     <div className="main">
       <section className="flex-container">
@@ -31,8 +53,12 @@ const Login = () => {
                   <input
                     type="username"
                     id="email"
+                    name="usuario"
                     placeholder="Usuario"
                     className="input input-password"
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                    }}
                   />
                 </div>
 
@@ -41,16 +67,20 @@ const Login = () => {
                   <input
                     type="password"
                     id="password"
+                    name="clave"
                     placeholder="Contraseña"
                     className="input input-password"
+                    onChange={(e) => {
+                      setClave(e.target.value);
+                    }}
                   />
                 </div>
 
                 <button
-                  onClick={() => alert("huehue")}
                   type="submit"
                   value="Login"
                   className="primary-button login-button"
+                  onClick={login}
                 >
                   Iniciar Sesion
                 </button>
@@ -59,15 +89,17 @@ const Login = () => {
               <h1 className="subtitle">
                 Si no estás registrado, regístrate aquí
               </h1>
-              <Link to='/register'>
-                <button
-                  type="button"
-                  value="Registrar"
-                  className="primary-button login-button"
-                >
-                  Registro
-                </button>
-              </Link>
+              <button
+                onClick={() => clicks("/register")}
+                type="submit"
+                value="Registrar"
+                placeholder="huehue"
+                className="primary-button login-button"
+              >
+                Registro
+              </button>
+
+              <h1>{loginStatus}</h1>
             </div>
           </div>
         </section>

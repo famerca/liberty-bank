@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/Login.scss";
 import useri from "../icons/User.svg";
 import emaili from "../icons/Mail.svg";
 import locki from "../icons/Lock.svg";
 import logo from "../icons/LB.png";
 import img from "../icons/img.png";
+import Axios from "axios";
+
+/*username, clave, nombre, correo*/
 
 const Register = () => {
+  const [username, setUsername] = useState("");
+  const [clave, setClave] = useState("");
+  const [nombre, setNombre] = useState("");
+  const [correo, setCorreo] = useState("");
+
+  const submitUser = (event) => {
+    event.preventDefault();
+    Axios.post("http://localhost:3001/register", {
+      username: username,
+      clave: clave,
+      nombre: nombre,
+      correo: correo,
+    });
+  };
+
   return (
     <div className="main">
       <section className="flex-container">
@@ -26,9 +44,13 @@ const Register = () => {
                   <img src={useri} className="icons" />
                   <input
                     type="name"
-                    id="email"
+                    id="name"
+                    name="nombre"
                     placeholder="Nombre"
                     className="input input-password"
+                    onChange={(e) => {
+                      setNombre(e.target.value);
+                    }}
                   />
                 </div>
 
@@ -36,9 +58,13 @@ const Register = () => {
                   <img src={useri} className="icons" />
                   <input
                     type="username"
-                    id="email"
+                    id="username"
+                    name="username"
                     placeholder="Usuario"
                     className="input input-password"
+                    onChange={(e) => {
+                      setUsername(e.target.value);
+                    }}
                   />
                 </div>
 
@@ -47,8 +73,12 @@ const Register = () => {
                   <input
                     type="email"
                     id="email"
+                    name="correo"
                     placeholder="E-mail"
                     className="input input-password"
+                    onChange={(e) => {
+                      setCorreo(e.target.value);
+                    }}
                   />
                 </div>
 
@@ -57,8 +87,12 @@ const Register = () => {
                   <input
                     type="password"
                     id="password"
+                    name="clave"
                     placeholder="Contraseña"
                     className="input input-password"
+                    onChange={(e) => {
+                      setClave(e.target.value);
+                    }}
                   />
                 </div>
 
@@ -72,11 +106,13 @@ const Register = () => {
                   />
                 </div>
 
-                <input
-                  type="submit"
+                <button
                   value="Register"
                   className="primary-button login-button"
-                />
+                  onClick={submitUser}
+                >
+                  Registar
+                </button>
               </form>
             </div>
           </div>

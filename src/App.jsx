@@ -39,8 +39,8 @@ function App() {
               <Route index element={
                 user ? <Home user={user} /> : <Login />
               } />
-              <Route path='/login' element={user ? <Navigate to='/home' /> : <Login />} />
-              <Route path='/register' element={user ? <Navigate to='/home' /> : <Register />} />
+              <Route path='/login' element={0 ? <Navigate to='/home' /> : <Login />} />
+              <Route path='/register' element={0 ? <Navigate to='/home' /> : <Register />} />
               <Route path='/home' element={
                 <PvRoute user={user}>
                   <Home user={user} />
