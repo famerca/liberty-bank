@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react"// , useRef, forwardRef, useImperativeHandle } from 'react'
 import { VscError } from 'react-icons/vsc'
 import { AiFillPlusCircle } from 'react-icons/ai'
@@ -134,9 +133,7 @@ const Table = (props) => {
       </div>
       <table style={tableStyle}>
         {head}
-        {datos.length === 0 ? <label> loading ....</label> :
-          <Rows token={props.token} setShowNewRow={setNewRow} showNewRow={newRow} data={datos} tipo={tipo} />
-        }
+        <Rows token={props.token} setShowNewRow={setNewRow} showNewRow={newRow} data={datos} tipo={tipo} />
       </table>
     </div >
 
@@ -178,13 +175,18 @@ const Rows = (props) => {
           }
 
           return data.json();
-        }).then(update => {
-
-          setDatos([{ nombre: "", tipo: "", id: update }, ...datos])
-          console.log(update);
         }).catch(e => {
           console.log(e);
+        }).finally(update => {
+          if (update) {
+
+            setDatos([{ nombre: "", tipo: "", id: update }, ...datos])
+          } else {
+
+            setDatos([{ nombre: "", tipo: "", id: "" }, ...datos])
+          }
         });
+
     }
 
     const addCuenta = () => {
@@ -206,12 +208,16 @@ const Rows = (props) => {
           }
 
           return data.json();
-        }).then(update => {
-          setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: update }, ...datos])
-          console.log(update);
         }).catch(e => {
           console.log(e);
+        }).finally(update => {
+          if (update) {
+            setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: update }, ...datos])
+          } else {
+            setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: "" }, ...datos])
+          }
         });
+
     }
 
     if (showNewRow) {
@@ -239,6 +245,7 @@ const Rows = (props) => {
 
   }, [deleteRow, datos])
 
+  console.log(datos)
   return (
     <>
       {datos.map((row, index) => {
