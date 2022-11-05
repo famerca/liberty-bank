@@ -9,6 +9,7 @@ const domain = "http://localhost:5020";
 
 const Home = ({user}) => {
     const [list, setList] = useState([]);
+    const [categorias, setCats] = useState([]);
     const [active, setActive] = useState({saldos:{}, transacciones: []});
 
     const seleccionarCuenta = (index) => {
@@ -25,6 +26,14 @@ const Home = ({user}) => {
             });
     },[]);
 
+    useEffect(() => {
+        if(user)
+            getCategorias(user.token).then(r => {
+                console.log(r);
+                setCats(r);
+            });
+    },[user]);
+
     useEffect((() => {setActive(calcularCuentaTotal(list))}), [list])
 
     return (
@@ -32,7 +41,7 @@ const Home = ({user}) => {
             <HomeInfo info={active} />
             <HomeSaldos saldos={active.saldos}/>
             <HomeCuentas onSelectTotal={selectTotal} onSelect={seleccionarCuenta} cuentas={list}/>
-            <HomeTransacciones trns={active.transacciones}/>
+            <HomeTransacciones cats={categorias} trns={active.transacciones}/>
         </div>
     )
 }
@@ -90,6 +99,35 @@ const getData = (user) =>
     })
     
 }
+
+const getCategorias = (token) => 
+{
+    return  new Promise(next => {
+
+        fetch(`${domain}/categorias/${token}`)
+        .then(response => {
+            if(response.status === 200)
+            {
+                response.json().then( r => next(r));
+            }
+            else if(response.status === 400)
+            {
+                console.log(response);
+                response.text().then(r =>  {
+                    alert(r);
+                    next([])
+                });
+            }
+        }).catch(err => {
+            console.log(err)
+            next([]);
+        });
+
+    })
+    
+}
+
+
 
 
 export default Home;

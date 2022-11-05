@@ -4,7 +4,7 @@ import HomeTransaccion from './transaccion';
 import HomeFiltro from './filter';
 import { useState } from 'react';
 
-const HomeTransacciones = ({trns}) => {
+const HomeTransacciones = ({trns, cats}) => {
   
     const [showFiltro, setShowFiltro] = useState(false);
     const [filterFilds, setFilterFilds] = useState({
@@ -55,7 +55,7 @@ const HomeTransacciones = ({trns}) => {
                 <button onClick={() => {setShowFiltro(!showFiltro)}}>
                     <IoFilterSharp/>
                 </button>
-                { showFiltro ? <HomeFiltro filds={filterFilds} updateFilds={updateFilds}/> : ''}
+                { showFiltro ? <HomeFiltro cats={cats} filds={filterFilds} updateFilds={updateFilds}/> : ''}
             </div>
 
             <div className="tabla-container">
