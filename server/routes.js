@@ -75,9 +75,19 @@ router.post("/categoria/delete", async (req, res) => {
 })
 
 router.post("/movimiento/save", async (req, res) => {
-  const { monto, ID_categoria, ID_cuenta, referencia, fecha, concepto, id_usuario } = req.body
-  await queryDB(`INSERT INTO bd_movimiento( monto, ID_categoria, ID_cuenta, referencia, fecha, concepto, id_usuario) VALUES ( '${monto}', '${ID_categoria}','${ID_cuenta}', '${referencia}', '${fecha}', '${concepto}',  '${id_usuario}')`)
-    .then(response => res.json(response))
+  const { monto, ID_categoria, ID_cuenta, referencia, tipo, fecha, concepto, id_usuario } = req.body
+  selectDB("db_cuentas", `id = '${ID_cuenta}'`).then(r =>{
+    let saldo = r[0].saldo;
+    if(tipo === "Ingreso")
+      saldo += Number(monto);
+    else if(tipo === "Egreso")
+      saldo -= Number(monto);
+    queryDB(`INSERT INTO bd_movimiento( monto, ID_categoria, ID_cuenta, referencia, fecha, concepto, id_usuario) VALUES ( '${monto}', '${ID_categoria}','${ID_cuenta}', '${referencia}', '${fecha}', '${concepto}',  '${id_usuario}')`)
+      .then(response => {
+        queryDB(`UPDATE db_cuentas SET saldo=${saldo} WHERE id=${ID_cuenta}`).then(r => res.sendStatus(200))
+        
+      })
+  })
 })
 
 router.get("/transacciones", async (req, res) => {

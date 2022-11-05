@@ -27,6 +27,7 @@ export default function AddMovForm(props) {
       referencia: data.NoReferencia,
       fecha: fecha,
       concepto: data.Concepto,
+      tipo: data.Tipo,
       id_usuario: token
     }
     const options = {
