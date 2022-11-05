@@ -1,9 +1,12 @@
-
 import '../../styles/Home.scss';
 
-const HomeFiltro = ({updateFilds, filds}) => {
+const domain = "http://localhost:5020";
 
-
+const HomeFiltro = ({updateFilds, filds, cats}) => {
+    const list = filtrarCats(cats, filds.tipo).map(cat => {
+            return <option value={cat.id}>{cat.nombre}</option>
+        }
+      );
 
     return (
         <div className="home-filter">
@@ -15,11 +18,8 @@ const HomeFiltro = ({updateFilds, filds}) => {
             </select>
             <label htmlFor="">Categoria</label>
             <select value={filds.categoria} onChange={(e) => {updateFilds('categoria', e.target.value)}}>
-                <option value="0">Todos</option>
-                <option value="1">Pago de luz</option>
-                <option value="2">Pago de agua</option>
-                <option value="3">Renta</option>
-                <option value="4">Nomina de empleados</option>
+                <option value="0">Todas</option>
+               {list}
             </select>
             <label htmlFor="">Fecha</label>
             <div>
@@ -35,5 +35,18 @@ const HomeFiltro = ({updateFilds, filds}) => {
         </div>
     )
 }
+
+
+const filtrarCats = (cats, tipo) =>{
+    if(tipo !== "todos")
+    {
+        console.log(cats);
+        cats = cats.filter( cat => cat.tipo.toLowerCase() === tipo.toLowerCase());
+        console.log(cats);
+        return cats;
+    }
+    return cats;
+}
+
 
 export default HomeFiltro;

@@ -8,11 +8,13 @@ import Login from './components/Login';
 import PvRoute from './components/PvRoute';
 import Register from './components/Register'
 import Movimientos from './components/Movimientos';
+import AddMovForm from './components/AddMovForm'
 
 
 function App() {
 
   const [user, setUser] = useState(null);
+  // const [user, setUser] = useState({ token: 1 });
 
   const login = () => {
     if (user)
@@ -48,10 +50,15 @@ function App() {
               } />
               <Route path='/movimientos' element={
                 <PvRoute user={user}>
-                  <Movimientos token={2} />
+                  <Movimientos user={user} />
                 </PvRoute>
               } />
 
+              <Route path='/aggmovimientos' element={
+                <PvRoute user={user}>
+                  <AddMovForm user={user} />
+                </PvRoute>
+              } />
             </Routes>
           </main>
         </div>

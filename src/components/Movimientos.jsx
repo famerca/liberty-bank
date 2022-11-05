@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react"// , useRef, forwardRef, useImperativeHandle } from 'react'
 import { VscError } from 'react-icons/vsc'
 import { AiFillPlusCircle } from 'react-icons/ai'
@@ -48,7 +47,8 @@ let datosCuentas1 = [
 ]
 
 
-const Movimientos = ({ token }) => {
+const Movimientos = (props) => {
+  const { token } = props.user
   const [datosCategorias, setDatosCategoria] = useState([])
   const [datosCuentas, setDatosCuentas] = useState([])
   useEffect(() => {
@@ -62,7 +62,7 @@ const Movimientos = ({ token }) => {
         })
         setDatosCategoria([...data_])
       })
-  }, [])
+  }, [token])
 
   useEffect(() => {
     fetch(`/cuentas/${token}`)
@@ -75,7 +75,7 @@ const Movimientos = ({ token }) => {
         })
         setDatosCuentas([...data_])
       })
-  }, [])
+  }, [token])
 
   const tablesStyle = { display: "grid", gridTemplateColumns: "1fr 2fr", gridGap: "10px", padding: "20px", backgroundColor: "rgba(155,155,155,0.3)", height: "100%", width: "100%" }
   return (
@@ -133,9 +133,7 @@ const Table = (props) => {
       </div>
       <table style={tableStyle}>
         {head}
-        {datos.length === 0 ? <label> loading ....</label> :
-          <Rows token={props.token} setShowNewRow={setNewRow} showNewRow={newRow} data={datos} tipo={tipo} />
-        }
+        <Rows token={props.token} setShowNewRow={setNewRow} showNewRow={newRow} data={datos} tipo={tipo} />
       </table>
     </div >
 
@@ -177,13 +175,18 @@ const Rows = (props) => {
           }
 
           return data.json();
-        }).then(update => {
-
-          setDatos([{ nombre: "", tipo: "", id: update }, ...datos])
-          console.log(update);
         }).catch(e => {
           console.log(e);
+        }).finally(update => {
+          if (update) {
+
+            setDatos([{ nombre: "", tipo: "", id: update }, ...datos])
+          } else {
+
+            setDatos([{ nombre: "", tipo: "", id: "" }, ...datos])
+          }
         });
+
     }
 
     const addCuenta = () => {
@@ -205,12 +208,16 @@ const Rows = (props) => {
           }
 
           return data.json();
-        }).then(update => {
-          setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: update }, ...datos])
-          console.log(update);
         }).catch(e => {
           console.log(e);
+        }).finally(update => {
+          if (update) {
+            setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: update }, ...datos])
+          } else {
+            setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: "" }, ...datos])
+          }
         });
+
     }
 
     if (showNewRow) {
@@ -238,6 +245,7 @@ const Rows = (props) => {
 
   }, [deleteRow, datos])
 
+  console.log(datos)
   return (
     <>
       {datos.map((row, index) => {
@@ -370,6 +378,9 @@ const RowData = (props) => {// forwardRef((props, ref) => {
       // console.log("despues: ", timer)
     }
   }
+  useEffect(() => {
+    updateRow("categoria")
+  }, [tipo])
 
 
 
@@ -377,8 +388,13 @@ const RowData = (props) => {// forwardRef((props, ref) => {
     <>
       {type === "movimientos" ?
         <tr style={trStyle}>
-          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} onKeyUp={delay(e => { updateRow("categoria") }, 2000)} type="text" value={nombre} /> </td>
-          <td style={{ gridColumn: "6/9", textAlign: "start" }}><input style={inputStyle} onChange={(e) => setTipo(e.target.value)} onKeyUp={delay(e => { updateRow("categoria") }, 2000)} type="text" defaultValue={tipo} /></td>
+          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} onKeyUp={delay(e => { updateRow("categoria") }, 2000)} type="text" defaultValue={nombre} /> </td>
+          <td style={{ gridColumn: "6/9", textAlign: "start" }}>
+            <select style={{ ...inputStyle, width: "auto" }} onChange={(e) => { setTipo(e.target.value); }} >
+              <option selected="true" disabled="disabled">{tipo}</option>
+              <option value="Ingreso">Ingreso</option>
+              <option value="Egreso">Egreso</option>
+            </select></td>
           <td style={{ gridColumn: "9", fontSize: "calc(60%)", textAlign: "start" }}>{id}</td>
           <td style={{ gridColumn: "10", textAlign: "start" }} >  <button style={buttonStyle} onClick={handleDelete}  ><VscError size={20} /> </button> </td>
         </tr>

@@ -1,9 +1,14 @@
 const express = require('express')
 const router = express.Router();
+// <<<<<<< HEAD
 const { selectDB, queryDB, db } = require("./db")
 const { mapearCuentas } = require('./cuentas')
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+// =======
+// const { selectDB, queryDB } = require("./db")
+// const { mapearCuentas } = require('./cuentas')
+// >>>>>>> daniel_nuevo
 
 //solo para pruebas
 router.get("/categorias/:id", async (req, res) => {
@@ -69,6 +74,12 @@ router.post("/categoria/delete", async (req, res) => {
   await queryDB(`DELETE FROM Categoria  WHERE id= '${id}' `).then(response => res.json(response))
 })
 
+router.post("/movimiento/save", async (req, res) => {
+  const { monto, ID_categoria, ID_cuenta, referencia, fecha, concepto, id_usuario } = req.body
+  await queryDB(`INSERT INTO bd_movimiento( monto, ID_categoria, ID_cuenta, referencia, fecha, concepto, id_usuario) VALUES ( '${monto}', '${ID_categoria}','${ID_cuenta}', '${referencia}', '${fecha}', '${concepto}',  '${id_usuario}')`)
+    .then(response => res.json(response))
+})
+
 router.get("/transacciones", async (req, res) => {
   const token = req.query.token || 0;
 
@@ -122,7 +133,7 @@ router.post("/login", (req, res) => {
         res.send({ err: err });
       }
 
-      if (result.length > 0) {
+      if (result) {
         bcrypt.compare(clave, result[0].clave, (error, response) => {
           console.log(response, clave);
           if (response) {
