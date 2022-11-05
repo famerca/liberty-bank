@@ -45,7 +45,7 @@ const obtenerMovimientoByCuenta = (id_cuentas) =>
         }
 
         queryDB(`SELECT m.concepto, m.ID_categoria as cat_n, m.referencia,
-        DATE_FORMAT(m.fecha, "%Y-%m-%d") as fecha, m.monto, m.tipo, m.ID_cuenta as cuenta, c.nombre as categoria 
+        DATE_FORMAT(m.fecha, "%Y-%m-%d") as fecha, m.monto, c.tipo as tipo, m.ID_cuenta as cuenta, c.nombre as categoria 
          FROM bd_movimiento as m, Categoria as c 
          WHERE c.id = m.ID_categoria AND (${ids}) ORDER BY m.fecha DESC`)
          .then(r => {
