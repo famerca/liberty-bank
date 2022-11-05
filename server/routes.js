@@ -85,7 +85,10 @@ router.get("/transacciones", async (req, res) => {
 
   if (token !== 0) {
     selectDB('db_cuentas', `id_usuario = '${token}'`).then(x => {
-      mapearCuentas(x).then(r => res.json(r));
+      if(x.length === 0)
+        res.json([])
+      else
+        mapearCuentas(x).then(r => res.json(r));
     });
   } else {
     res.status(400).send("argumentos invalidos");
