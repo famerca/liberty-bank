@@ -5,8 +5,8 @@ require('dotenv').config
 const path = require('path')
 
 const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const session = require("express-session");
+// const cookieParser = require("cookie-parser");
+// const session = require("express-session");
 
 
 
@@ -22,20 +22,20 @@ app.use(
     credentials: true,
   })
 );
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(
-  session({
-    key: "userId",
-    secret: "subscribe",
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-      expires: 300,
-    },
-  })
-);
+// app.use(
+//   session({
+//     key: "userId",
+//     secret: "subscribe",
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//       expires: 300,
+//     },
+//   })
+// );
 
 
 

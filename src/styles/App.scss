@@ -43,9 +43,13 @@ button.outline-button
   background: transparent;
   align-items: center;
   align-content: center;
+  text-decoration: none !important;
   justify-content: space-between;
 }
-
+.button-container a
+{
+  text-decoration: none;
+}
 button.outline-button svg
 {
   height: 22px;

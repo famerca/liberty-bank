@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './styles/App.scss';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
@@ -16,24 +16,23 @@ function App() {
   const [user, setUser] = useState(null);
   // const [user, setUser] = useState({ token: 1 });
 
-  const login = () => {
-    if (user)
-      setUser(false)
-    else
-      setUser(true);
-  }
-
-
+  useEffect(() =>
+  {
+    const sess = JSON.parse(localStorage.getItem('session'));
+    if(sess)
+      setUser(sess);
+    
+  }, [])
 
   return (
     <BrowserRouter>
       <div className="App">
-        {user !== false &&
+        {user &&
           <Header />
         }
         {/* <button onClick={login}>Login</button> */}
         <div className="main-container">
-          {user !== false &&
+          {user &&
             <Navbar />
           }
           <main>

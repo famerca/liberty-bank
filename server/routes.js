@@ -108,18 +108,15 @@ router.post("/register", (req, res) => {
       [username, hash, nombre, correo],
       (err, result) => {
         console.log(err);
+        if(err)
+          res.status(400).send("error");
+        else
+          res.sendStatus(200);
       }
     );
   });
 });
 
-router.get("/login", (req, res) => {
-  if (req.session.user) {
-    res.send({ loggedIn: true, user: req.session.user });
-  } else {
-    res.send({ loggedIn: false });
-  }
-});
 
 router.post("/login", (req, res) => {
   const username = req.body.username;
@@ -137,9 +134,7 @@ router.post("/login", (req, res) => {
         bcrypt.compare(clave, result[0].clave, (error, response) => {
           console.log(response, clave);
           if (response) {
-            req.session.user = result[0];
-            console.log(req.session.user);
-            res.send(result);
+            res.json({token: result[0].ID_usuario});
           } else {
             res.send({ message: "Wrong username/password combination!" });
           }

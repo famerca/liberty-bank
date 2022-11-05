@@ -8,25 +8,24 @@ import img from "../icons/img.png";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 
+
 const Login = ({ setUser }) => {
   const [username, setUsername] = useState("");
   const [clave, setClave] = useState("");
 
-  const [loginStatus, setLoginStatus] = useState("");
 
   const login = (event) => {
-    setUser({ token: 1 })
+    //setUser({ token: 1 })
     event.preventDefault();
-    Axios.post("/login", {
+    Axios.post("http://localhost:5020/login", {
       username: username,
       clave: clave,
     }).then((response) => {
-      if (response.data.message) {
-        setLoginStatus(response.data.message);
-        clicks("/home");
-      } else {
-        setLoginStatus(response.data[0].username);
-      }
+      console.log(response);
+      if (response.status === 200) {
+        localStorage.setItem('session', JSON.stringify(response.data));
+        setUser(response.data);
+      } 
     });
   };
 
@@ -100,7 +99,6 @@ const Login = ({ setUser }) => {
                 Registro
               </button>
 
-              <h1>{loginStatus}</h1>
             </div>
           </div>
         </section>
