@@ -156,6 +156,7 @@ const Rows = (props) => {
 
   useEffect(() => {
 
+
     const addCategoria = () => {
       const update = {
         id_usuario: token
@@ -175,16 +176,20 @@ const Rows = (props) => {
           }
 
           return data.json();
-        }).catch(e => {
-          console.log(e);
-        }).finally(update => {
+        }).then(update => {
+          console.log(update)
           if (update) {
 
             setDatos([{ nombre: "", tipo: "", id: update }, ...datos])
+            console.log(update)
           } else {
 
             setDatos([{ nombre: "", tipo: "", id: "" }, ...datos])
           }
+
+        })
+        .catch(e => {
+          console.log(e);
         });
 
     }
@@ -208,14 +213,16 @@ const Rows = (props) => {
           }
 
           return data.json();
-        }).catch(e => {
-          console.log(e);
-        }).finally(update => {
+        }).then(update => {
+          console.log(update)
           if (update) {
             setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: update }, ...datos])
           } else {
             setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: "" }, ...datos])
           }
+        })
+        .catch(e => {
+          console.log(e);
         });
 
     }
