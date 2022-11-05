@@ -371,6 +371,9 @@ const RowData = (props) => {// forwardRef((props, ref) => {
       // console.log("despues: ", timer)
     }
   }
+  useEffect(() => {
+    updateRow("categoria")
+  }, [tipo])
 
 
 
@@ -378,8 +381,13 @@ const RowData = (props) => {// forwardRef((props, ref) => {
     <>
       {type === "movimientos" ?
         <tr style={trStyle}>
-          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} onKeyUp={delay(e => { updateRow("categoria") }, 2000)} type="text" value={nombre} /> </td>
-          <td style={{ gridColumn: "6/9", textAlign: "start" }}><input style={inputStyle} onChange={(e) => setTipo(e.target.value)} onKeyUp={delay(e => { updateRow("categoria") }, 2000)} type="text" defaultValue={tipo} /></td>
+          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} onKeyUp={delay(e => { updateRow("categoria") }, 2000)} type="text" defaultValue={nombre} /> </td>
+          <td style={{ gridColumn: "6/9", textAlign: "start" }}>
+            <select style={{ ...inputStyle, width: "auto" }} onChange={(e) => { setTipo(e.target.value); }} >
+              <option selected="true" disabled="disabled">{tipo}</option>
+              <option value="Ingreso">Ingreso</option>
+              <option value="Egreso">Egreso</option>
+            </select></td>
           <td style={{ gridColumn: "9", fontSize: "calc(60%)", textAlign: "start" }}>{id}</td>
           <td style={{ gridColumn: "10", textAlign: "start" }} >  <button style={buttonStyle} onClick={handleDelete}  ><VscError size={20} /> </button> </td>
         </tr>

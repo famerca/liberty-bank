@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
-const {selectDB, queryDB} = require("./db")
-const {mapearCuentas} = require('./cuentas')
+const { selectDB, queryDB } = require("./db")
+const { mapearCuentas } = require('./cuentas')
 
 //solo para pruebas
 router.get("/categorias/:id", async (req, res) => {
@@ -67,16 +67,20 @@ router.post("/categoria/delete", async (req, res) => {
   await queryDB(`DELETE FROM Categoria  WHERE id= '${id}' `).then(response => res.json(response))
 })
 
+router.post("/movimiento/save", async (req, res) => {
+  const { monto, ID_categoria, ID_cuenta, referencia, fecha, concepto, id_usuario } = req.body
+  await queryDB(`INSERT INTO bd_movimiento( monto, ID_categoria, ID_cuenta, referencia, fecha, concepto, id_usuario) VALUES ( '${monto}', '${ID_categoria}','${ID_cuenta}', '${referencia}', '${fecha}', '${concepto}',  '${id_usuario}')`)
+    .then(response => res.json(response))
+})
+
 router.get("/transacciones", async (req, res) => {
   const token = req.query.token || 0;
 
-  if(token !== 0)
-  {
+  if (token !== 0) {
     selectDB('db_cuentas', `id_usuario = '${token}'`).then(x => {
-      mapearCuentas(x).then( r =>  res.json(r));
+      mapearCuentas(x).then(r => res.json(r));
     });
-  }else
-  {
+  } else {
     res.status(400).send("argumentos invalidos");
   }
 })

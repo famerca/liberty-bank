@@ -5,13 +5,52 @@ import "../styles/Movform.scss";
 
 export default function AddMovForm(props) {
   const { token } = props.user
+  const [fecha, setFecha] = useState("")
   const [datosCuentas, setDatosCuentas] = useState([])
   const [datosCategoria, setDatosCategoria] = useState([])
   const { register, handleSubmit } = useForm();
   // const [fechaini, fechaselec] = useState(new Date());
 
 
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {
+    if (data === undefined) return;
+    // fetch("/movimiento/save")
+    // console.log(datosCategoria)
+    const { tipo } = datosCategoria.find(x => x.id == data.Categoria)
+    if (tipo === undefined) return;
+    console.log(fecha)
+
+    const insert = {
+      monto: data.Monto,
+      ID_categoria: data.Categoria,
+      ID_cuenta: data.Cuenta,
+      referencia: data.NoReferencia,
+      fecha: fecha,
+      concepto: data.Concepto,
+      id_usuario: token
+    }
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(insert),
+    };
+    fetch('/movimiento/save', options)
+      .then(data => {
+        if (!data.ok) {
+          throw Error(data.status);
+        }
+
+        return data.json();
+      }).catch(e => {
+        console.log(e);
+      });
+
+    console.log(tipo)
+    console.log(data);
+  }
+
 
   useEffect(() => {
     fetch(`/categorias/${token}`)
@@ -55,15 +94,18 @@ export default function AddMovForm(props) {
           <select {...register("Tipo")}>
             <option value="Ingreso">ingreso</option>
             <option value="Egreso">egreso</option>
+
           </select>
         </div>
 
         <div className="input-movform">
           <label>Categoria</label>
-          <select {...register("Categoria")}>
+          <select  {...register("Categoria")}>
+
+            <option selected="true" disabled="disabled">Seleccione</option>
             {datosCategoria.map((value, index) => {
-              const { nombre, tipo } = value
-              return (<option key={index} value={`${nombre} (${tipo})`}>{`${nombre} (${tipo})`}</option>)
+              const { nombre, tipo, id } = value
+              return (<option key={index} value={id}>{`${nombre} (${tipo})`}</option>)
             })}
             {/* <option value="PagoLuz">Pago de Luz</option> */}
             {/* <option value="PagoAgua">Pago de Agua</option> */}
@@ -77,9 +119,10 @@ export default function AddMovForm(props) {
         <div className="input-movform">
           <label>Cuenta</label>
           <select {...register("Cuenta")} >
+            <option selected="true" disabled="disabled">Seleccione</option>
             {datosCuentas.map((value, index) => {
-              const { nombreCuenta } = value
-              return (<option key={index} value={`${nombreCuenta}`}>{`${nombreCuenta}`}</option>)
+              const { nombreCuenta, id } = value
+              return (<option key={index} value={id}>{`${nombreCuenta}`}</option>)
             })}
 
             {/* <option value="CuentaPagos">Cuenta de Pagos</option> */}
@@ -97,7 +140,7 @@ export default function AddMovForm(props) {
 
         <div className="input-movform">
           <label>Fecha</label>
-          <input type="date" name="" id="" />
+          <input {...register("fecha")} onChange={(e) => setFecha(e.target.value)} type="date" name="" id="" />
         </div>
 
 
