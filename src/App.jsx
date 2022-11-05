@@ -28,12 +28,12 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-        {user !== false &&
+        {user &&
           <Header />
         }
         {/* <button onClick={login}>Login</button> */}
         <div className="main-container">
-          {user !== false &&
+          {user &&
             <Navbar />
           }
           <main>

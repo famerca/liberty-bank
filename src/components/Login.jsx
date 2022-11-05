@@ -15,19 +15,24 @@ const Login = ({ setUser }) => {
   const [loginStatus, setLoginStatus] = useState("");
 
   const login = (event) => {
-    setUser({ token: 1 })
     event.preventDefault();
     Axios.post("/login", {
       username: username,
       clave: clave,
     }).then((response) => {
-      if (response.data.message) {
-        setLoginStatus(response.data.message);
-        clicks("/home");
-      } else {
-        setLoginStatus(response.data[0].username);
+      console.log(response)
+      if (response.status === 200) {
+        if (response.data.message) {
+          console.log(response.data.message)
+          setLoginStatus(response.data.message);
+        } else {
+          setUser({ token: response.data[0].ID_usuario })
+          setLoginStatus(response.data[0].username);
+        }
       }
+
     });
+
   };
 
   const clicks = useNavigate();
