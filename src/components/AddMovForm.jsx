@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 export default function AddMovForm(props) {
   const { token } = props.user
   const [fecha, setFecha] = useState("")
+  const [tipo, setTipo] = useState("ingreso");
+  const [lista, setLista] = useState(null);
   const [datosCuentas, setDatosCuentas] = useState([])
   const [datosCategoria, setDatosCategoria] = useState([])
   const { register, handleSubmit } = useForm();
@@ -39,7 +41,7 @@ export default function AddMovForm(props) {
       },
       body: JSON.stringify(insert),
     };
-    fetch('/movimiento/save', options)
+    fetch('http://localhost:5020/movimiento/save', options)
       .then(data => {
         if (!data.ok) {
           throw Error(data.status);
@@ -59,7 +61,7 @@ export default function AddMovForm(props) {
 
 
   useEffect(() => {
-    fetch(`/categorias/${token}`)
+    fetch(`http://localhost:5020/categorias/${token}`)
       .then(response => (response.ok) ? response.json() : [])
       .then(datos => {
         let data_ = [];
@@ -85,6 +87,17 @@ export default function AddMovForm(props) {
   }, [])
   // console.log(fechaselec);
 
+
+  useEffect(() => {
+
+    const list = filtrarCats(datosCategoria, tipo).map((cat,index) => {
+      return <option key={"cat-"+index} value={cat.id}>{cat.nombre}</option>
+    });
+
+    setLista(list);
+
+  }, [tipo, datosCategoria])
+
   return (
     <div className="main-container-movform">
       <form onSubmit={handleSubmit(onSubmit)} className="form-container-movform">
@@ -97,9 +110,9 @@ export default function AddMovForm(props) {
 
         <div className="input-movform">
           <label>Tipo</label>
-          <select {...register("Tipo")}>
-            <option value="Ingreso">ingreso</option>
-            <option value="Egreso">egreso</option>
+          <select {...register("Tipo")} onChange={(e) => setTipo(e.target.value)} >
+            <option value="ingreso">Ingreso</option>
+            <option value="egreso">Egreso</option>
 
           </select>
         </div>
@@ -109,10 +122,7 @@ export default function AddMovForm(props) {
           <select  {...register("Categoria")}>
 
             <option selected="true" disabled="disabled">Seleccione</option>
-            {datosCategoria.map((value, index) => {
-              const { nombre, tipo, id } = value
-              return (<option key={index} value={id}>{`${nombre} (${tipo})`}</option>)
-            })}
+            {lista}
             {/* <option value="PagoLuz">Pago de Luz</option> */}
             {/* <option value="PagoAgua">Pago de Agua</option> */}
             {/* <option value="Renta">Renta</option> */}
@@ -126,10 +136,6 @@ export default function AddMovForm(props) {
           <label>Cuenta</label>
           <select {...register("Cuenta")} >
             <option selected="true" disabled="disabled">Seleccione</option>
-            {datosCuentas.map((value, index) => {
-              const { nombreCuenta, id } = value
-              return (<option key={index} value={id}>{`${nombreCuenta}`}</option>)
-            })}
 
             {/* <option value="CuentaPagos">Cuenta de Pagos</option> */}
             {/* <option value="CuentaCobros">Cuenta de Cobros</option> */}
@@ -162,4 +168,15 @@ export default function AddMovForm(props) {
       </form>
     </div>
   );
+}
+
+const filtrarCats = (cats, tipo) =>{
+  if(tipo !== "todos")
+  {
+      console.log(cats);
+      cats = cats.filter( cat => cat.tipo.toLowerCase() === tipo.toLowerCase());
+      console.log(cats);
+      return cats;
+  }
+  return cats;
 }
