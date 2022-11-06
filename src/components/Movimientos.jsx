@@ -146,6 +146,7 @@ const Rows = (props) => {
   const { token } = props
   const { setShowNewRow, showNewRow } = props
 
+  // const [update, setUpdate] = useState(null)
   const [deleteRow, setDeleteRow] = useState({ index: -1 })
   const [datos, setDatos] = useState([])
   const { tipo } = props
@@ -217,6 +218,7 @@ const Rows = (props) => {
         }).then(update => {
           console.log(update)
           if (update) {
+            // setUpdate(update)
             setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: update }, ...datos])
           } else {
             setDatos([{ nombreCuenta: "", numero: "", titular: "", banco: "", id: "" }, ...datos])
@@ -296,7 +298,7 @@ const RowData = (props) => {// forwardRef((props, ref) => {
     setTitular(row.titular)
     setBanco(row.banco)
 
-  }, [row, type_])
+  }, [type_, props.row])
 
 
   const handleDelete = (e) => {
@@ -373,27 +375,35 @@ const RowData = (props) => {// forwardRef((props, ref) => {
         console.log(e);
       });
 
-    // if (type === "movimientos") {
-    //   props.setDatos([{ nombre: nombre, tipo: tipo, id: id }, ...props.datos.slice(1)])
-    // } else {
-    //   props.setDatos([{ nombreCuenta: nombre, numero: numero, titular: titular, banco: banco, id: id }, ...props.datos.slice(1)])
-    // }
-  }
+    let data_ = [...props.datos]
+    if (data_[0].id === id) {
+      if (type === "movimientos") {
+        // const { id } = data_[0]
+        data_[0] = { nombre: nombre, tipo: tipo, id: id }
+        props.setDatos([...data_])
+      } else {
+        // const { id } = data_[0]
+        data_[0] = { nombreCuenta: nombre, numero: numero, titular: titular, banco: banco, id: id }
+        props.setDatos([...data_])
+      }
 
-  function delay(callback, ms) {
-    var timer = 0;
-    return function() {
-      // console.log("antes: ", timer)
-      var context = this, arg = arguments;
-      clearTimeout(timer)
-      timer = setTimeout(function() {
-
-        callback.apply(context, arg)
-
-      }, ms || 0)
-      // console.log("despues: ", timer)
     }
   }
+
+  // function delay(callback, ms) {
+  //   var timer = 0;
+  //   return function() {
+  //     // console.log("antes: ", timer)
+  //     var context = this, arg = arguments;
+  //     clearTimeout(timer)
+  //     timer = setTimeout(function() {
+
+  //       callback.apply(context, arg)
+
+  //     }, ms || 0)
+  //     // console.log("despues: ", timer)
+  //   }
+  // }
   // useEffect(() => {
   //   updateRow("categoria")
   // }, [tipo])
