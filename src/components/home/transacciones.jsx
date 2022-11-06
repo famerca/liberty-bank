@@ -23,7 +23,7 @@ const HomeTransacciones = ({trns, cats}) => {
     {
         if(filterFilds.tipo !== "todos")
         {
-            trcs = trcs.filter((val) =>  val.tipo === filterFilds.tipo);
+            trcs = trcs.filter((val) =>  val.tipo.toLowerCase() === filterFilds.tipo.toLowerCase());
         }
 
         if(filterFilds.categoria != 0)

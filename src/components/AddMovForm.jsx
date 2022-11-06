@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
 import React, { useEffect, useState } from "react";
 import "../styles/Movform.scss";
+import { useNavigate } from "react-router-dom";
 //import { DatePicker } from "@material-ui/pickers";
 
 export default function AddMovForm(props) {
@@ -11,6 +12,7 @@ export default function AddMovForm(props) {
   const { register, handleSubmit } = useForm();
   // const [fechaini, fechaselec] = useState(new Date());
 
+  const clicks = useNavigate();
 
   const onSubmit = data => {
     if (data === undefined) return;
@@ -27,6 +29,7 @@ export default function AddMovForm(props) {
       referencia: data.NoReferencia,
       fecha: fecha,
       concepto: data.Concepto,
+      tipo: data.Tipo,
       id_usuario: token
     }
     const options = {
@@ -42,7 +45,10 @@ export default function AddMovForm(props) {
           throw Error(data.status);
         }
 
-        return data.json();
+        alert("Movimiento Agregado");
+        clicks("/home");
+
+        return true;
       }).catch(e => {
         console.log(e);
       });

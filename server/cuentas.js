@@ -52,7 +52,6 @@ const obtenerMovimientoByCuenta = (id_cuentas) =>
             next(
                 r.map( mov => {
                     mov.cuenta = id_cuentas.indexOf(mov.cuenta);
-                    mov.tipo = mov.tipo ? "ingreso" : "egreso";
                     return mov;
                 })
             );
