@@ -175,6 +175,7 @@ const Rows = (props) => {
             throw Error(data.status);
           }
 
+
           return data.json();
         }).then(update => {
           console.log(update)
@@ -257,7 +258,7 @@ const Rows = (props) => {
     <>
       {datos.map((row, index) => {
         return (
-          <RowData index={index} key={index} type={tipo} row={row} setDeleteRow={setDeleteRow} />
+          <RowData setDatos={setDatos} datos={datos} index={index} key={index} type={tipo} row={row} setDeleteRow={setDeleteRow} />
         )
       })}
     </>
@@ -335,7 +336,9 @@ const RowData = (props) => {// forwardRef((props, ref) => {
     }
   }
 
+
   const updateRow = (table) => {
+
 
     const updateCategoria = {
       id: id,
@@ -369,6 +372,12 @@ const RowData = (props) => {// forwardRef((props, ref) => {
       }).catch(e => {
         console.log(e);
       });
+
+    // if (type === "movimientos") {
+    //   props.setDatos([{ nombre: nombre, tipo: tipo, id: id }, ...props.datos.slice(1)])
+    // } else {
+    //   props.setDatos([{ nombreCuenta: nombre, numero: numero, titular: titular, banco: banco, id: id }, ...props.datos.slice(1)])
+    // }
   }
 
   function delay(callback, ms) {
@@ -385,9 +394,9 @@ const RowData = (props) => {// forwardRef((props, ref) => {
       // console.log("despues: ", timer)
     }
   }
-  useEffect(() => {
-    updateRow("categoria")
-  }, [tipo])
+  // useEffect(() => {
+  //   updateRow("categoria")
+  // }, [tipo])
 
 
 
@@ -395,22 +404,23 @@ const RowData = (props) => {// forwardRef((props, ref) => {
     <>
       {type === "movimientos" ?
         <tr style={trStyle}>
-          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} onKeyUp={delay(e => { updateRow("categoria") }, 2000)} type="text" defaultValue={nombre} /> </td>
+          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} onBlur={() => updateRow("categoria")} type="text" defaultValue={nombre} /> </td>
+          {/* <td style={{ gridColumn: "6/9", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setTipo(e.target.value)} onBlur={() => updateRow("categoria")} type="text" defaultValue={tipo} /> </td> */}
           <td style={{ gridColumn: "6/9", textAlign: "start" }}>
-            <select style={{ ...inputStyle, width: "auto" }} onChange={(e) => { setTipo(e.target.value); }} >
-              <option selected="true" disabled="disabled">{tipo}</option>
-              <option value="Ingreso">Ingreso</option>
-              <option value="Egreso">Egreso</option>
+            <select style={{ ...inputStyle, width: "auto" }} onChange={(e) => setTipo(e.target.value)} onBlur={() => updateRow("categoria")} >
+              <option selected="true" disabled="disabled">{tipo !== "" ? tipo[0].toUpperCase() + tipo.slice(1) : tipo}</option>
+              <option value="ingreso">Ingreso</option>
+              <option value="egreso">Egreso</option>
             </select></td>
           <td style={{ gridColumn: "9", fontSize: "calc(60%)", textAlign: "start" }}>{id}</td>
           <td style={{ gridColumn: "10", textAlign: "start" }} >  <button style={buttonStyle} onClick={handleDelete}  ><VscError size={20} /> </button> </td>
         </tr>
         :
         <tr style={trStyle}>
-          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} onKeyUp={delay(e => { updateRow("cuentas") }, 2000)} type="text" defaultValue={nombre} /></td>
-          <td style={{ gridColumn: "6/10", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNumero(e.target.value)} onKeyUp={delay(e => { updateRow("cuentas") }, 2000)} type="text" defaultValue={numero} /></td>
-          <td style={{ gridColumn: "10/14", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setTitular(e.target.value)} onKeyUp={delay(e => { updateRow("cuentas") }, 2000)} type="text" defaultValue={titular} /></td>
-          <td style={{ gridColumn: "14/17", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setBanco(e.target.value)} onKeyUp={delay(e => { updateRow("cuentas") }, 2000)} type="text" defaultValue={banco} /></td>
+          <td style={{ gridColumn: "1/6", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNombre(e.target.value)} onBlur={() => updateRow("cuentas")} type="text" defaultValue={nombre} /></td>
+          <td style={{ gridColumn: "6/10", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setNumero(e.target.value)} onBlur={() => updateRow("cuentas")} type="text" defaultValue={numero} /></td>
+          <td style={{ gridColumn: "10/14", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setTitular(e.target.value)} onBlur={() => updateRow("cuentas")} type="text" defaultValue={titular} /></td>
+          <td style={{ gridColumn: "14/17", textAlign: "start" }} ><input style={inputStyle} onChange={(e) => setBanco(e.target.value)} onBlur={() => updateRow("cuentas")} type="text" defaultValue={banco} /></td>
           <td style={{ gridColumn: "17", fontSize: "calc(60%)", textAlign: "start" }}  >{id}</td>
           <td style={{ gridColumn: "18", textAlign: "start" }} ><button style={buttonStyle} onClick={handleDelete} > <VscError size={20} /></button></td>
         </tr>

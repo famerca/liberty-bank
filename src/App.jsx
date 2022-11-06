@@ -13,15 +13,14 @@ import AddMovForm from './components/AddMovForm'
 
 function App() {
 
-  const [user, setUser] = useState(null);
-  // const [user, setUser] = useState({ token: 1 });
+  // const [user, setUser] = useState(null);
+  const [user, setUser] = useState({ token: 1 });
 
-  useEffect(() =>
-  {
+  useEffect(() => {
     const sess = JSON.parse(localStorage.getItem('session'));
-    if(sess)
+    if (sess)
       setUser(sess);
-    
+
   }, [])
 
   return (
