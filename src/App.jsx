@@ -17,7 +17,7 @@ function App() {
   // const [user, setUser] = useState();
 
   useEffect(() => {
-    const sess = JSON.parse(localStorage.getItem('session'));
+    const sess = JSON.parse(sessionStorage.getItem('session'));
     if (sess)
       setUser(sess);
 

@@ -78,9 +78,9 @@ router.post("/movimiento/save", async (req, res) => {
   const { monto, ID_categoria, ID_cuenta, referencia, tipo, fecha, concepto, id_usuario } = req.body
   selectDB("db_cuentas", `id = '${ID_cuenta}'`).then(r =>{
     let saldo = r[0].saldo;
-    if(tipo === "Ingreso")
+    if(tipo === "ingreso")
       saldo += Number(monto);
-    else if(tipo === "Egreso")
+    else if(tipo === "egreso")
       saldo -= Number(monto);
     queryDB(`INSERT INTO bd_movimiento( monto, ID_categoria, ID_cuenta, referencia, fecha, concepto, id_usuario) VALUES ( '${monto}', '${ID_categoria}','${ID_cuenta}', '${referencia}', '${fecha}', '${concepto}',  '${id_usuario}')`)
       .then(response => {

@@ -23,7 +23,7 @@ const Login = ({ setUser }) => {
     }).then((response) => {
       console.log(response);
       if (response.status === 200) {
-        localStorage.setItem('session', JSON.stringify(response.data));
+        sessionStorage.setItem('session', JSON.stringify(response.data));
         setUser(response.data);
       }else
       {

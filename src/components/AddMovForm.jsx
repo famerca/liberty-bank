@@ -74,7 +74,7 @@ export default function AddMovForm(props) {
   }, [])
 
   useEffect(() => {
-    fetch(`/cuentas/${token}`)
+    fetch(`http://localhost:5020/cuentas/${token}`)
       .then(response => (response.ok) ? response.json() : [])
       .then(datos => {
         let data_ = [];
@@ -119,9 +119,9 @@ export default function AddMovForm(props) {
 
         <div className="input-movform">
           <label>Categoria</label>
-          <select  {...register("Categoria")}>
+          <select defaultValue=""  {...register("Categoria")}>
 
-            <option selected="true" disabled="disabled">Seleccione</option>
+            <option value="" disabled="disabled">Seleccione</option>
             {lista}
             {/* <option value="PagoLuz">Pago de Luz</option> */}
             {/* <option value="PagoAgua">Pago de Agua</option> */}
@@ -134,9 +134,12 @@ export default function AddMovForm(props) {
 
         <div className="input-movform">
           <label>Cuenta</label>
-          <select {...register("Cuenta")} >
-            <option selected="true" disabled="disabled">Seleccione</option>
-
+          <select defaultValue={0} {...register("Cuenta")} >
+            <option value={0} disabled="disabled">Seleccione</option>
+            {datosCuentas.map((value, index) => {
+              const { nombreCuenta, id } = value
+              return (<option key={"cuenta-"+index} value={id}>{`${nombreCuenta}`}</option>)
+            })}
             {/* <option value="CuentaPagos">Cuenta de Pagos</option> */}
             {/* <option value="CuentaCobros">Cuenta de Cobros</option> */}
             {/* <option value="CuentaDividendos">Cuenta de dividendos</option> */}
