@@ -5,7 +5,7 @@ import HomeSaldos from './home/saldos'
 import HomeCuentas from './home/cuentas'
 import HomeTransacciones from './home/transacciones'
 
-const domain = "http://localhost:5020";
+const domain = "";
 
 const Home = ({user}) => {
     const [list, setList] = useState([]);

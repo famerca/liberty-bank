@@ -41,7 +41,7 @@ export default function AddMovForm(props) {
       },
       body: JSON.stringify(insert),
     };
-    fetch('http://localhost:5020/movimiento/save', options)
+    fetch('/movimiento/save', options)
       .then(data => {
         if (!data.ok) {
           throw Error(data.status);
@@ -61,7 +61,7 @@ export default function AddMovForm(props) {
 
 
   useEffect(() => {
-    fetch(`http://localhost:5020/categorias/${token}`)
+    fetch(`/categorias/${token}`)
       .then(response => (response.ok) ? response.json() : [])
       .then(datos => {
         let data_ = [];
@@ -74,7 +74,7 @@ export default function AddMovForm(props) {
   }, [])
 
   useEffect(() => {
-    fetch(`http://localhost:5020/cuentas/${token}`)
+    fetch(`/cuentas/${token}`)
       .then(response => (response.ok) ? response.json() : [])
       .then(datos => {
         let data_ = [];
