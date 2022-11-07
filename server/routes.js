@@ -144,7 +144,7 @@ router.post("/login", (req, res) => {
       }
 
       console.log(clave)
-      if (result && clave) {
+      if (result.length > 0 && clave) {
         bcrypt.compare(clave, result[0].clave, (error, response) => {
           console.log(response, clave);
           if (response) {
@@ -154,7 +154,7 @@ router.post("/login", (req, res) => {
           }
         });
       } else {
-        res.send({ message: "User doesn't exist" });
+        res.status(400).send({ message: "User doesn't exist" });
       }
     }
   );
