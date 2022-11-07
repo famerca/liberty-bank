@@ -23,9 +23,9 @@ const Register = () => {
       nombre: nombre,
       correo: correo,
     }).then(r => {
-      if(r.status === 200)
+      if (r.status === 200)
         link("/home")
-    }) 
+    })
   };
 
   const link = useNavigate();
