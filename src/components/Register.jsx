@@ -24,7 +24,7 @@ const Register = () => {
       correo: correo,
     }).then(r => {
       if (r.status === 200)
-        link("/home")
+        link("/login")
     })
   };
 
