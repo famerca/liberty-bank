@@ -150,7 +150,7 @@ router.post("/login", (req, res) => {
           if (response) {
             res.json({ token: result[0].ID_usuario });
           } else {
-            res.send({ message: "Wrong username/password combination!" });
+            res.status(400).send({ message: "Wrong username/password combination!" });
           }
         });
       } else {
