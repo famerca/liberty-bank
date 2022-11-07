@@ -76,16 +76,16 @@ router.post("/categoria/delete", async (req, res) => {
 
 router.post("/movimiento/save", async (req, res) => {
   const { monto, ID_categoria, ID_cuenta, referencia, tipo, fecha, concepto, id_usuario } = req.body
-  selectDB("db_cuentas", `id = '${ID_cuenta}'`).then(r =>{
+  selectDB("db_cuentas", `id = '${ID_cuenta}'`).then(r => {
     let saldo = r[0].saldo;
-    if(tipo === "ingreso")
+    if (tipo === "ingreso")
       saldo += Number(monto);
-    else if(tipo === "egreso")
+    else if (tipo === "egreso")
       saldo -= Number(monto);
     queryDB(`INSERT INTO bd_movimiento( monto, ID_categoria, ID_cuenta, referencia, fecha, concepto, id_usuario) VALUES ( '${monto}', '${ID_categoria}','${ID_cuenta}', '${referencia}', '${fecha}', '${concepto}',  '${id_usuario}')`)
       .then(response => {
         queryDB(`UPDATE db_cuentas SET saldo=${saldo} WHERE id=${ID_cuenta}`).then(r => res.sendStatus(200))
-        
+
       })
   })
 })
@@ -95,7 +95,7 @@ router.get("/transacciones", async (req, res) => {
 
   if (token !== 0) {
     selectDB('db_cuentas', `id_usuario = '${token}'`).then(x => {
-      if(x.length === 0)
+      if (x.length === 0)
         res.json([])
       else
         mapearCuentas(x).then(r => res.json(r));
@@ -121,7 +121,7 @@ router.post("/register", (req, res) => {
       [username, hash, nombre, correo],
       (err, result) => {
         console.log(err);
-        if(err)
+        if (err)
           res.status(400).send("error");
         else
           res.sendStatus(200);
@@ -143,11 +143,12 @@ router.post("/login", (req, res) => {
         res.send({ err: err });
       }
 
-      if (result) {
+      console.log(clave)
+      if (result && clave) {
         bcrypt.compare(clave, result[0].clave, (error, response) => {
           console.log(response, clave);
           if (response) {
-            res.json({token: result[0].ID_usuario});
+            res.json({ token: result[0].ID_usuario });
           } else {
             res.send({ message: "Wrong username/password combination!" });
           }

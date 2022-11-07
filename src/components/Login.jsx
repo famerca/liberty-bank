@@ -17,7 +17,7 @@ const Login = ({ setUser }) => {
   const login = (event) => {
     //setUser({ token: 1 })
     event.preventDefault();
-    Axios.post("http://localhost:5020/login", {
+    Axios.post("/login", {
       username: username,
       clave: clave,
     }).then((response) => {
@@ -25,8 +25,7 @@ const Login = ({ setUser }) => {
       if (response.status === 200) {
         sessionStorage.setItem('session', JSON.stringify(response.data));
         setUser(response.data);
-      }else
-      {
+      } else {
         console.log(response.data.message);
       }
     });
